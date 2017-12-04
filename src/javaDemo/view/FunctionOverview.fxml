@@ -49,7 +49,7 @@
                               <TextField fx:id="num" GridPane.columnIndex="3" />
                               <Label text="input:" GridPane.rowIndex="1" />
                               <TextField fx:id="inputParam" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label fx:id="inputType" textFill="#ee0808" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <Label fx:id="inputType" textFill="#ee0808" GridPane.columnIndex="1 " GridPane.rowIndex="2">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font></Label>
