@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/javaDemo/util/JDBCUtil.java" afterPath="$PROJECT_DIR$/src/javaDemo/util/JDBCUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/javaDemo/view/FunctionOverview.fxml" afterPath="$PROJECT_DIR$/src/javaDemo/view/FunctionOverview.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/javaDemo/view/FunctionOverviewController.java" afterPath="$PROJECT_DIR$/src/javaDemo/view/FunctionOverviewController.java" />
-    </list>
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -138,8 +133,8 @@
       <file leaf-file-name="FunctionOverviewController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/javaDemo/view/FunctionOverviewController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="191" column="20" lean-forward="true" selection-start-line="191" selection-start-column="20" selection-end-line="191" selection-end-column="20" />
+            <state relative-caret-position="133">
+              <caret line="183" column="47" lean-forward="false" selection-start-line="183" selection-start-column="47" selection-end-line="183" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2737#2745#0" expanded="true" />
@@ -278,8 +273,7 @@
     </treeState>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1" />
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="813" />
@@ -607,12 +601,12 @@
       <workItem from="1512270151907" duration="96000" />
       <workItem from="1512356737989" duration="425000" />
       <workItem from="1512357198264" duration="7917000" />
-      <workItem from="1512371430804" duration="2608000" />
+      <workItem from="1512371430804" duration="3243000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108958000" />
+    <option name="totallyTimeSpent" value="109593000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -624,7 +618,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="813" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="813" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1701,8 +1695,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/javaDemo/view/FunctionOverviewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="191" column="20" lean-forward="true" selection-start-line="191" selection-start-column="20" selection-end-line="191" selection-end-column="20" />
+        <state relative-caret-position="133">
+          <caret line="183" column="47" lean-forward="false" selection-start-line="183" selection-start-column="47" selection-end-line="183" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2737#2745#0" expanded="true" />
