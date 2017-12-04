@@ -30,7 +30,6 @@ public class JDBCUtil {
         try {
             String sql = "create table" +createTable+"(";
 
-
             for (int i = 0 ; i < columnNum ; i ++){
                 sql += "NO"+i+"varchar(20),";
             }

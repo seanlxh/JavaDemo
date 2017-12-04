@@ -45,6 +45,9 @@ public class FunctionOverviewController{
     private TextField inputParam;
 
     @FXML
+    private TextField tableNameField;
+
+    @FXML
     private Label inputType;
 
     @FXML
@@ -58,6 +61,8 @@ public class FunctionOverviewController{
     private ArrayList<Class> curInputClasses = null;
 
     private Type Resulttype = null;
+
+    private static ArrayList<ArrayList<String>> listContent;
 
 
     private MainApp mainApp;
@@ -128,6 +133,7 @@ public class FunctionOverviewController{
 
     @FXML
     private void handleExecute() {
+        listContent.clear();
         result.clear();
         ArrayList<Object> objectArray = new ArrayList<Object>();
         Object[] objectFinalArray;
@@ -187,6 +193,15 @@ public class FunctionOverviewController{
                     result.appendText(ReflectionToStringBuilder.toString(resultText)+" ");
                 result.appendText("\n");
             }
+    }
+
+    @FXML
+    private void storeInDatabase() {
+        String tableName = tableNameField.getText();
+
+
+
+
 
 
 
