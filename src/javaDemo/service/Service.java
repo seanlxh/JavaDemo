@@ -13,12 +13,14 @@ import java.util.Stack;
 //分析函数的函数
 public class Service {
 
-    public  int count = 0;
+    public  int countLeft = 0;
+    public  int countRight = 0;
     public  ArrayList<String> result = new ArrayList<String>();
-    public  ArrayList<String> getFunctionList(int num , String fileddress){
+    public  ArrayList<String> getFunctionList(int leftNum ,int rightNum, String fileddress){
 
 
-        count = num;
+        countLeft = leftNum;
+        countRight = rightNum;
 
         ArrayList<String> funtions = new ArrayList<String>();
         ArrayList<String> judges = new ArrayList<String>();
@@ -34,7 +36,7 @@ public class Service {
 
         for(int i = 0 ; i < funtions.size() ; i ++) {
             // System.out.println(mp.get(funtions.get(i)));
-            if (mp.get(funtions.get(i)) != count * 2)
+            if (mp.get(funtions.get(i)) < countLeft * 2 || mp.get(funtions.get(i)) > countRight * 2)
                 continue;
 
             boolean judgeCharNone = false;

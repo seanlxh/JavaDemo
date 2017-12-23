@@ -17,5 +17,7 @@
     <orderEntry type="library" name="Librarians" level="project" />
     <orderEntry type="library" name="SalesManagerment" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.45-bin" level="project" />
+    <orderEntry type="library" name="javassist-3.9.0" level="project" />
+    <orderEntry type="library" name="销售管理系统" level="project" />
   </component>
 </module>

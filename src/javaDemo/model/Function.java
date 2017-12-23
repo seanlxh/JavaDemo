@@ -20,6 +20,8 @@ public class Function {
 
     private final StringProperty levelName;
 
+    private final StringProperty enableName;
+
     public Function(){
         this(null, null , null);
     }
@@ -28,6 +30,7 @@ public class Function {
         this.className = new SimpleStringProperty(className);
         this.methodName = new SimpleStringProperty(methodName);
         this.levelName = new SimpleStringProperty(levelName);
+        this.enableName = new SimpleStringProperty("");
     }
 
 
@@ -55,5 +58,13 @@ public class Function {
 
     public void setLevelName(String level){
         this.levelName.set(level);
+    }
+
+    public StringProperty enableNameProperty() {
+        return enableName;
+    }
+
+    public void setEnableName(String enableName){
+        this.enableName.set(enableName);
     }
 }

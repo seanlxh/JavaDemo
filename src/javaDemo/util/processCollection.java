@@ -2,10 +2,7 @@ package javaDemo.util;
 
 import javafx.beans.property.StringProperty;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -100,6 +97,7 @@ public class processCollection {
         Method mth = obj.getClass().getDeclaredMethod(functionName1,classArray);
 
         Type t = mth.getAnnotatedReturnType().getType();
+
 
         return t;
 
