@@ -2,6 +2,7 @@ package javaDemo;
 
 import javaDemo.model.Function;
 import javaDemo.view.FunctionOverviewController;
+import javaDemo.view.RootLayout;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,10 +48,12 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
-
+            RootLayout controller = loader.getController();
+            controller.setMainApp(this);
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
+
 
         }catch(IOException e){
             e.printStackTrace();

@@ -1,6 +1,12 @@
 package javaDemo.util;
 
 import javafx.beans.property.StringProperty;
+import javassist.CtClass;
+import javassist.CtMethod;
+import javassist.NotFoundException;
+import javassist.bytecode.CodeAttribute;
+import javassist.bytecode.LocalVariableAttribute;
+import javassist.bytecode.MethodInfo;
 
 import java.lang.reflect.*;
 import java.util.ArrayList;
@@ -147,23 +153,48 @@ public class processCollection {
     }
 
     public static Boolean judgeBasicType(Object obj){
-        if(obj.getClass() == (int.class))
+        Class cls = obj.getClass();
+        if(cls == (int.class))
             return true;
-        else if(obj.getClass() == (boolean.class))
+        else if(cls == (boolean.class))
             return true;
-        else if(obj.getClass() == char.class)
+        else if(cls == char.class)
             return true;
-        else if(obj.getClass() == byte.class)
+        else if(cls == byte.class)
             return true;
-        else if(obj.getClass() == short.class)
+        else if(cls == short.class)
             return true;
-        else if(obj.getClass() == long.class)
+        else if(cls == long.class)
             return true;
-        else if(obj.getClass() == double.class)
+        else if(cls == double.class)
             return true;
-        else if(obj.getClass() == float.class)
+        else if(cls == float.class)
             return true;
-        else if(obj.getClass() == java.lang.String.class)
+        else if(cls == java.lang.String.class)
+            return true;
+        else if(cls == java.math.BigDecimal.class)
+            return true;
+        else if(cls == java.math.BigInteger.class)
+            return true;
+        else if(cls == java.lang.Boolean.class)
+            return true;
+        else if(cls == java.lang.Byte.class)
+            return true;
+        else if(cls == java.lang.Character.class)
+            return true;
+        else if(cls == java.lang.CharSequence.class)
+            return true;
+        else if(cls == java.lang.Double.class)
+            return true;
+        else if(cls == java.lang.Float.class)
+            return true;
+        else if(cls == java.lang.Integer.class)
+            return true;
+        else if(cls == java.lang.Long.class)
+            return true;
+        else if(cls == java.lang.Number.class)
+            return true;
+        else if(cls == java.lang.Short.class)
             return true;
         else
             return false;
@@ -284,5 +315,29 @@ public class processCollection {
         return object;
 
 
+    }
+
+
+    public static String[] getMethodParamNames(CtMethod cm) throws Exception {
+        CtClass cc = cm.getDeclaringClass();
+        MethodInfo methodInfo = cm.getMethodInfo();
+        CodeAttribute codeAttribute = methodInfo.getCodeAttribute();
+        LocalVariableAttribute attr = (LocalVariableAttribute) codeAttribute
+                .getAttribute(LocalVariableAttribute.tag);
+        if (attr == null) {
+            throw new Exception(cc.getName());
+        }
+
+        String[] paramNames = null;
+        try {
+            paramNames = new String[cm.getParameterTypes().length];
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
+        int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;
+        for (int i = 0; i < paramNames.length; i++) {
+            paramNames[i] = attr.variableName(i + pos);
+        }
+        return paramNames;
     }
 }

@@ -3,26 +3,35 @@ package javaDemo.view;
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import javaDemo.MainApp;
 import javaDemo.model.Function;
+import javaDemo.service.Csv;
 import javaDemo.service.Service;
 import javaDemo.util.JDBCUtil;
 import javaDemo.util.jsonUtil;
 import javaDemo.util.processCollection;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javassist.*;
+import javassist.bytecode.CodeAttribute;
+import javassist.bytecode.LocalVariableAttribute;
+import javassist.bytecode.MethodInfo;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import javax.swing.*;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.lang.reflect.*;
 import java.lang.reflect.Modifier;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import static javaDemo.util.processCollection.getMethodNameWithoutExtra;
 import static javaDemo.util.processCollection.setItems;
@@ -56,10 +65,22 @@ public class FunctionOverviewController{
     private TextField numRight;
 
     @FXML
+    private TextField leftCount;
+
+    @FXML
+    private TextField rightCount;
+
+    @FXML
     private TextField inputParam;
 
     @FXML
+    private TextField classAdrField;
+
+    @FXML
     private TextField tableNameField;
+
+    @FXML
+    private TextField muiltInputParam;
 
     @FXML
     private Label inputType;
@@ -68,7 +89,15 @@ public class FunctionOverviewController{
     private Label resultType;
 
     @FXML
+    private TextField logAddress;
+
+    @FXML
+    private TextArea contentArea;
+
+    @FXML
     private TextArea result;
+
+
 
     private Function curFunction;
 
@@ -78,6 +107,7 @@ public class FunctionOverviewController{
 
     private static ArrayList<ArrayList<String>> listContent = new ArrayList<ArrayList<String>>();
 
+    private static ArrayList<ArrayList<String>> muiltContent = new ArrayList<ArrayList<String>>();
 
     private MainApp mainApp;
 
@@ -166,7 +196,7 @@ public class FunctionOverviewController{
     @FXML
     private void handleGetClassFile(){
         ClassPool pool = ClassPool.getDefault();
-
+        pool.importPackage("javax.swing");
             String className = curFunction.classNameProperty().getValue();
             String methodName = getMethodNameWithoutExtra(curFunction.methodNameProperty().getValue());
 
@@ -174,41 +204,123 @@ public class FunctionOverviewController{
             try {
                 pt = pool.get(className);
                 CtMethod m1 = pt.getDeclaredMethod(methodName);
-                CtMethod m2 = CtNewMethod.make("    public static Boolean judgeBasicType(Object obj){\n" +
-                        "        if(obj.getClass() == (int.class))\n" +
-                        "            return true;\n" +
-                        "        else if(obj.getClass() == (boolean.class))\n" +
-                        "            return true;\n" +
-                        "        else if(obj.getClass() == char.class)\n" +
-                        "            return true;\n" +
-                        "        else if(obj.getClass() == byte.class)\n" +
-                        "            return true;\n" +
-                        "        else if(obj.getClass() == short.class)\n" +
-                        "            return true;\n" +
-                        "        else if(obj.getClass() == long.class)\n" +
-                        "            return true;\n" +
-                        "        else if(obj.getClass() == double.class)\n" +
-                        "            return true;\n" +
-                        "        else if(obj.getClass() == float.class)\n" +
-                        "            return true;\n" +
-                        "        else if(obj.getClass() == java.lang.String.class)\n" +
-                        "            return true;\n" +
-                        "        else\n" +
-                        "            return false;\n" +
+                CtMethod m2 = CtNewMethod.make("public static boolean export(String methodName , String params, String returnType,String Addr){" +
+                        "boolean isSucess=false;" +
+                        " java.io.FileOutputStream out=null;" +
+                        " java.io.OutputStreamWriter osw=null;" +
+                        " java.io.BufferedWriter bw=null;" +
+                        "        try {" +
+                        "            out = new java.io.FileOutputStream(Addr,true);" +
+                        "            osw = new java.io.OutputStreamWriter(out,\"UTF-8\");" +
+                        "            bw =new java.io.BufferedWriter(osw);" +
+                        "            if(methodName!=null && params != null  && returnType != null){" +
+                        "            String a =  methodName +\" \"+ params +\" \"+ returnType ;  bw.append(a).append(\"\\n\");" +
+                        "            }" +
+                        "            isSucess=true;" +
+                        "} catch (Exception e) {" +
+                        "            isSucess=false;" +
+                        "        }finally{" +
+                        "            if(bw!=null){" +
+                        "                try {" +
+                        "                    bw.close();" +
+                        "                    bw=null;" +
+                        "                } catch (java.io.IOException e) {" +
+                        "                    e.printStackTrace();" +
+                        "                } " +
+                        "            }" +
+                        "            if(osw!=null){" +
+                        "                try {" +
+                        "                    osw.close();" +
+                        "                    osw=null;" +
+                        "                } catch (java.io.IOException e) {" +
+                        "                    e.printStackTrace();" +
+                        "                } " +
+                        "            }" +
+                        "            if(out!=null){" +
+                        "                try {" +
+                        "                    out.close();" +
+                        "                    out=null;" +
+                        "                } catch (java.io.IOException e) {" +
+                        "                    e.printStackTrace();" +
+                        "                } " +
+                        "            }" +
+                       "        }" +
+                        "        return isSucess;" +
                         "    }", pt);
+
+
+
                 pt.addMethod(m2);
 
+
+                CtMethod m3 = CtNewMethod.make("public static boolean export1(String params, String returnType,String Addr){" +
+                        "boolean isSucess=false;" +
+                        " java.io.FileOutputStream out=null;" +
+                        " java.io.OutputStreamWriter osw=null;" +
+                        " java.io.BufferedWriter bw=null;" +
+                        "        try {" +
+                        "            out = new java.io.FileOutputStream(Addr,true);" +
+                        "            osw = new java.io.OutputStreamWriter(out,\"UTF-8\");" +
+                        "            bw =new java.io.BufferedWriter(osw);" +
+                        "            if( params != null  && returnType != null){" +
+                        "            String a = params +\",\"+ returnType ;  bw.append(a).append(\"\\n\");" +
+                        "            }" +
+                        "            isSucess=true;" +
+                        "} catch (Exception e) {" +
+                        "            isSucess=false;" +
+                        "        }finally{" +
+                        "            if(bw!=null){" +
+                        "                try {" +
+                        "                    bw.close();" +
+                        "                    bw=null;" +
+                        "                } catch (java.io.IOException e) {" +
+                        "                    e.printStackTrace();" +
+                        "                } " +
+                        "            }" +
+                        "            if(osw!=null){" +
+                        "                try {" +
+                        "                    osw.close();" +
+                        "                    osw=null;" +
+                        "                } catch (java.io.IOException e) {" +
+                        "                    e.printStackTrace();" +
+                        "                } " +
+                        "            }" +
+                        "            if(out!=null){" +
+                        "                try {" +
+                        "                    out.close();" +
+                        "                    out=null;" +
+                        "                } catch (java.io.IOException e) {" +
+                        "                    e.printStackTrace();" +
+                        "                } " +
+                        "            }" +
+                        "        }" +
+                        "        return isSucess;" +
+                        "    }", pt);
+
+
+
+
+                pt.addMethod(m3);
                 StringBuffer sb = new StringBuffer();
-                sb.append("for(int i = 0 ; i < $1.length ; i ++){");
-                sb.append("System.out.println($1[i]);");
-                sb.append("System.out.println(\"\\n\");}");
+                String address = logAddress.getText();
+                sb.append("for(int i = 0 ; i < "+curInputClasses.size()+" ; i++) {");
+                   // sb.append("for(int j = 0 ; j < $args[i].length ; j++){");
+                sb.append("if( $args[i].getClass().isArray() ) {");
+                    sb.append("System.out.println();");
+                sb.append("export(\""+"array:"+"\",java.util.Arrays.toString((Object[])$args[i]),\""+methodName+"\",\""+address+"\");");
+                sb.append("}");
+                sb.append("else{");
+                sb.append("export1($args[i].toString(),\""+methodName+"\",\""+address+"\");");
+                sb.append("}");
 
+                   // sb.append("}");
 
-
-
+                sb.append("}");
                 String code = sb.toString();
                 m1.insertBefore(code);
-                pt.writeFile("/Users/seanlxh/Downloads");
+
+                pt.writeFile(classAdrField.getText());
+                pt.defrost();
             } catch (NotFoundException e) {
                 e.printStackTrace();
             } catch (CannotCompileException e) {
@@ -226,6 +338,144 @@ public class FunctionOverviewController{
 //            TestBean bean = (TestBean) c.newInstance();
 //            bean.aaa(1,2,3);
 
+    }
+
+    @FXML
+    private void handleShowInfo(){
+        contentArea.clear();
+        String path = logAddress.getText();
+        Csv csv = new Csv();
+        ArrayList<String> arrays = csv.readLog(path);
+
+        for(int i = 0 ; i < arrays.size() ; i ++){
+            contentArea.appendText(arrays.get(i)+"\n");
+        }
+    }
+
+
+
+
+    @FXML
+    private void handleNumberInput(){
+        try{
+        muiltContent.clear();
+        int leftNum = Integer.valueOf(leftCount.getText());
+        int rightNum;
+        if(rightCount.getText() == null || rightCount.getText().length() == 0){
+            rightNum = 2147483646;
+        }
+        else{
+            rightNum = Integer.valueOf(rightCount.getText());
+        }
+
+        for(int i = leftNum ; i <= rightNum ; i ++){
+            Object[] objectFinalArray;
+            ArrayList<Object> objectArray = new ArrayList<Object>();
+            Object object = processCollection.getObjectFromStringAndClass(curInputClasses.get(0), String.valueOf(i));
+            objectArray.add(object);
+            objectFinalArray = (Object[]) objectArray.toArray();
+            Class[] classArray = (Class[])curInputClasses.toArray(new Class[curInputClasses.size()]);
+            Object resultText = null;
+            try {
+                resultText  = processCollection.execute(curFunction.classNameProperty().getValue(),
+                        curFunction.methodNameProperty().getValue(),classArray,objectFinalArray);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Collection collection = setItems(resultText);
+            if(collection != null){
+                Iterator it = collection.iterator();
+                while(it.hasNext()){
+                    muiltContent.add(new ArrayList<String>());
+                    Object obj = it.next();
+                    Collection collection1 = setItems(obj);
+                    if(collection1 != null){
+                        ArrayList<Object> tmp = new ArrayList<Object>(collection1);
+                        for(int k=0;k<tmp.size();k++) {
+                            Object value = tmp.get(k);
+                            if(processCollection.judgeBasicType(value)){
+                                muiltContent.get(muiltContent.size()-1).add(value.toString());
+                            }
+                            else{
+                                muiltContent.get(muiltContent.size()-1).add(ReflectionToStringBuilder.toString(value));
+                            }
+                        }
+                    }
+                    else{
+                        muiltContent.add(new ArrayList<String>());
+                        if(processCollection.judgeBasicType(obj)){
+                            muiltContent.get(muiltContent.size()-1).add(obj.toString());
+                        }
+                        else{
+                            muiltContent.get(muiltContent.size()-1).add(ReflectionToStringBuilder.toString(obj));
+                        }
+                    }
+                }
+            }
+            else {
+                muiltContent.add(new ArrayList<String>());
+                if(processCollection.judgeBasicType(resultText)){
+                    muiltContent.get(muiltContent.size()-1).add(resultText.toString());
+                }
+                else{
+                    muiltContent.get(muiltContent.size()-1).add(ReflectionToStringBuilder.toString(resultText));
+                }
+            }
+        }
+
+    } catch (Exception e) {
+            e.printStackTrace();
+        }
+    finally {
+            boolean isSucess=false;
+            java.io.FileOutputStream out=null;
+            java.io.OutputStreamWriter osw=null;
+            java.io.BufferedWriter bw=null;
+            try {
+                out = new java.io.FileOutputStream(tableNameField.getText(),true);
+                osw = new java.io.OutputStreamWriter(out,"utf-8");
+                bw =new java.io.BufferedWriter(osw);
+
+                for(int i = 0 ; i < muiltContent.size() ; i ++){
+                    String a =  "";
+                    for(int j = 0 ; j < muiltContent.get(i).size() ; j ++){
+                        a += muiltContent.get(i).get(j)+"',";
+                    }
+                    bw.append(a).append("\n");
+                }
+                isSucess=true;
+
+            } catch (Exception e) {
+                isSucess=false;
+            }finally{
+                if(bw!=null){
+                    try {
+                        bw.close();
+                        bw=null;
+                    } catch (java.io.IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if(osw!=null){
+                    try {
+                        osw.close();
+                        osw=null;
+                    } catch (java.io.IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if(out!=null){
+                    try {
+                        out.close();
+                        out=null;
+                    } catch (java.io.IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+
+        }
 
     }
 
@@ -233,11 +483,125 @@ public class FunctionOverviewController{
 
 
 
+    @FXML
+    private void handleMuiltInput(){
+        muiltContent.clear();
+        String input = muiltInputParam.getText();
+
+        JSONArray jsonArray = jsonUtil.getJsonArrayFromString(input);
+        int count = jsonArray.size();
+        for(int i = 0 ; i < count ; i ++){
+            JSONArray childJsonArray = jsonUtil.getJsonArrayFromString(jsonArray.getString(i));
+            Object[] objectFinalArray;
+            ArrayList<Object> objectArray = new ArrayList<Object>();
+            for(int j = 0 ; j < childJsonArray.size() ; j ++){
+                Object object = processCollection.getObjectFromStringAndClass(curInputClasses.get(j), childJsonArray.getString(j));
+                objectArray.add(object);
+            }
+            objectFinalArray = (Object[]) objectArray.toArray();
+            Class[] classArray = (Class[])curInputClasses.toArray(new Class[curInputClasses.size()]);
+            Object resultText = null;
+            try {
+                resultText  = processCollection.execute(curFunction.classNameProperty().getValue(),
+                        curFunction.methodNameProperty().getValue(),classArray,objectFinalArray);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Collection collection = setItems(resultText);
+            if(collection != null){
+                Iterator it = collection.iterator();
+                while(it.hasNext()){
+                    muiltContent.add(new ArrayList<String>());
+                    Object obj = it.next();
+                    Collection collection1 = setItems(obj);
+                    if(collection1 != null){
+                        ArrayList<Object> tmp = new ArrayList<Object>(collection1);
+                        for(int k=0;k<tmp.size();k++) {
+                            Object value = tmp.get(k);
+                            if(processCollection.judgeBasicType(value)){
+                                muiltContent.get(muiltContent.size()-1).add(value.toString());
+                            }
+                            else{
+                                muiltContent.get(muiltContent.size()-1).add(ReflectionToStringBuilder.toString(value));
+                            }
+                        }
+                    }
+                    else{
+                        muiltContent.add(new ArrayList<String>());
+                        if(processCollection.judgeBasicType(obj)){
+                            muiltContent.get(muiltContent.size()-1).add(obj.toString());
+                        }
+                        else{
+                            muiltContent.get(muiltContent.size()-1).add(ReflectionToStringBuilder.toString(obj));
+                        }
+                    }
+                }
+            }
+            else {
+                muiltContent.add(new ArrayList<String>());
+                if(processCollection.judgeBasicType(resultText)){
+                    muiltContent.get(muiltContent.size()-1).add(resultText.toString());
+                }
+                else{
+                    muiltContent.get(muiltContent.size()-1).add(ReflectionToStringBuilder.toString(resultText));
+                }
+            }
+        }
+        boolean isSucess=false;
+        java.io.FileOutputStream out=null;
+        java.io.OutputStreamWriter osw=null;
+        java.io.BufferedWriter bw=null;
+        try {
+            out = new java.io.FileOutputStream(tableNameField.getText(),true);
+            osw = new java.io.OutputStreamWriter(out,"utf-8");
+            bw =new java.io.BufferedWriter(osw);
+
+            for(int i = 0 ; i < muiltContent.size() ; i ++){
+                String a =  "";
+                for(int j = 0 ; j < muiltContent.get(i).size() ; j ++){
+                    a += muiltContent.get(i).get(j)+"',";
+                }
+                bw.append(a).append("\n");
+            }
+            isSucess=true;
+
+        } catch (Exception e) {
+            isSucess=false;
+        }finally{
+            if(bw!=null){
+                try {
+                    bw.close();
+                    bw=null;
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(osw!=null){
+                try {
+                    osw.close();
+                    osw=null;
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(out!=null){
+                try {
+                    out.close();
+                    out=null;
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+
 
 
     @FXML
     private void handleExecute() {
-        listContent.clear();
+
         result.clear();
         ArrayList<Object> objectArray = new ArrayList<Object>();
         Object[] objectFinalArray;
@@ -310,34 +674,83 @@ public class FunctionOverviewController{
 
                 result.appendText("\n");
             }
-    }
 
+
+
+
+    }
     @FXML
     private void storeInDatabase() {
-        String tableName = tableNameField.getText();
+
+
+        boolean isSucess=false;
+        java.io.FileOutputStream out=null;
+        java.io.OutputStreamWriter osw=null;
+        java.io.BufferedWriter bw=null;
         try {
-            JDBCUtil.init();
-            JDBCUtil.createTable(tableName,listContent.get(0).size());
+            out = new java.io.FileOutputStream(tableNameField.getText(),true);
+            osw = new java.io.OutputStreamWriter(out,"utf-8");
+            bw =new java.io.BufferedWriter(osw);
 
             for(int i = 0 ; i < listContent.size() ; i ++){
-                String tmp = "insert into "+tableName+" values(";
+                String a =  "";
                 for(int j = 0 ; j < listContent.get(i).size() ; j ++){
-                    tmp += "'"+listContent.get(i).get(j)+"',";
+                    a += listContent.get(i).get(j)+"',";
+
                 }
-                tmp = tmp.substring(0,tmp.length()-1);
-                tmp += ")";
-                JDBCUtil.insert(tmp);
+                bw.append(a).append("\n");
             }
 
+            isSucess=true;
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            isSucess=false;
+        }finally{
+            if(bw!=null){
+                try {
+                    bw.close();
+                    bw=null;
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(osw!=null){
+                try {
+                    osw.close();
+                    osw=null;
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(out!=null){
+                try {
+                    out.close();
+                    out=null;
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
+//        String tableName = tableNameField.getText();
+//        try {
+//            JDBCUtil.init();
+//            JDBCUtil.createTable(tableName,listContent.get(0).size());
+//
+//            for(int i = 0 ; i < listContent.size() ; i ++){
+//                String tmp = "insert into "+tableName+" values(";
+//                for(int j = 0 ; j < listContent.get(i).size() ; j ++){
+//                    tmp += "'"+listContent.get(i).get(j)+"',";
+//                }
+//                tmp = tmp.substring(0,tmp.length()-1);
+//                tmp += ")";
+//                JDBCUtil.insert(tmp);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
-
-
     private String showType(Function function){
         String result = "";
         curFunction = function;
@@ -350,7 +763,7 @@ public class FunctionOverviewController{
             String newTypeLabel = "";
             for(String para : paras){
                 newTypeLabel += para;
-                newTypeLabel += " ";
+                newTypeLabel += "/";
             }
             inputType.setText(newTypeLabel);
         }
@@ -367,30 +780,46 @@ public class FunctionOverviewController{
 
             boolean isAbs = Modifier.isAbstract(claz.getModifiers()) ;
             if(isAbs){
-                resultType.setText("abstract class");
+                //resultType.setText("abstract class");
                 result = "abstract class";
             }
             else{
                 Type type = processCollection.judgeClass(stringPropertyToString(className),
                         stringPropertyToString(methodName),tempClasses);
-                resultType.setText(type.getTypeName());
+                //resultType.setText(type.getTypeName());
                 Resulttype = type;
                 result = type.getTypeName();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
-            resultType.setText("can't execute");
+            //resultType.setText("can't execute");
             result = "can't execute";
         }
+        ClassPool pool  =  ClassPool.getDefault();
+        CtClass cc  = null;
+        try {
+            resultType.setText("");
+            cc = pool.get(stringPropertyToString(className));
+            CtMethod cm  =  cc.getDeclaredMethod(getMethodNameWithoutExtra(stringPropertyToString(methodName)));
+            MethodInfo methodInfo  =  cm.getMethodInfo();
+            CodeAttribute codeAttribute  =  methodInfo.getCodeAttribute();
+            LocalVariableAttribute attr  =  (LocalVariableAttribute) codeAttribute.getAttribute(LocalVariableAttribute.tag);
+            String[] paramNames  =   new  String[cm.getParameterTypes().length];
+            int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;
+            for  ( int  i  =   0 ; i  <  paramNames.length; i ++ )
+                paramNames[i]  =  attr.variableName(i+pos);
+            for  ( int  i  =   0 ; i  <  paramNames.length; i ++ ) {
+                String content = resultType.getText();
+                content += (paramNames[i]+"/");
+                resultType.setText(content);
+            }
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
         return result;
-
     }
-
-
     private boolean isAnalysisInputValid() {
         String errorMessage = "";
-
         if (fileAddress.getText() == null || fileAddress.getText().length() == 0) {
             errorMessage += "No valid fileAddress!\n";
         }
@@ -402,8 +831,6 @@ public class FunctionOverviewController{
                 || !processCollection.isNumeric(numRight.getText())) {
             errorMessage += "No valid num!\n";
         }
-
-
         if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -411,15 +838,4 @@ public class FunctionOverviewController{
             }
             return false;
         }
-
     }
-
-
-
-
-
-
-
-
-
-

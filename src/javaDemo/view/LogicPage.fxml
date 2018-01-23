@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="1200.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaDemo.view.LogicPage">
+   <children>
+      <SplitPane dividerPositions="0.3076152304609218" layoutX="183.0" layoutY="129.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="functionTabel1" layoutX="23.0" layoutY="67.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                        <TableColumn fx:id="levelColumn" prefWidth="75.0" text="Column X" />
+                      <TableColumn fx:id="classNameColumn" prefWidth="75.0" text="C1" />
+                      <TableColumn fx:id="methodNameColumn" prefWidth="75.0" text="C2" />
+                        <TableColumn fx:id="enableNameColumn" prefWidth="75.0" text="Column X" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TreeView fx:id="processResult" layoutY="31.0" prefHeight="493.0" prefWidth="437.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="31.0" />
+                  <Button layoutX="42.0" layoutY="559.0" mnemonicParsing="false" onAction="#addFunction" prefHeight="27.0" prefWidth="72.0" text="Add" />
+                  <Button layoutX="144.0" layoutY="559.0" mnemonicParsing="false" onAction="#removeFunction" prefHeight="27.0" prefWidth="72.0" text="Remove" />
+                  <Button layoutX="248.0" layoutY="559.0" mnemonicParsing="false" onAction="#upFunction" prefHeight="27.0" prefWidth="72.0" text="Up" />
+                  <Button layoutX="351.0" layoutY="559.0" mnemonicParsing="false" onAction="#downFunction" prefHeight="27.0" prefWidth="72.0" text="Down" />
+                  <ListView layoutX="460.0" layoutY="107.0" prefHeight="268.0" prefWidth="200.0" />
+                  <Button layoutX="527.0" layoutY="415.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" text="Add" />
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
