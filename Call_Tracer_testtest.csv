@@ -1,0 +1,5 @@
+"Thread","Method","Exit","Time (microseconds)"
+"main","TestBean.main(java.lang.String[ ])","false",0
+"main","Employ.<init>()","true",1109
+"main","TestBean.aaa(Employ)","false",1156
+"main","TestBean.aaa(Employ)","true",3614

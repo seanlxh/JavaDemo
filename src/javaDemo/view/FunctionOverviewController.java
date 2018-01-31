@@ -21,6 +21,8 @@ import javassist.bytecode.LocalVariableAttribute;
 import javassist.bytecode.MethodInfo;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import javax.swing.*;
@@ -33,9 +35,7 @@ import java.lang.reflect.Modifier;
 import java.sql.SQLException;
 import java.util.*;
 
-import static javaDemo.util.processCollection.getMethodNameWithoutExtra;
-import static javaDemo.util.processCollection.setItems;
-import static javaDemo.util.processCollection.stringPropertyToString;
+import static javaDemo.util.processCollection.*;
 
 
 public class FunctionOverviewController{
@@ -197,6 +197,8 @@ public class FunctionOverviewController{
     private void handleGetClassFile(){
         ClassPool pool = ClassPool.getDefault();
         pool.importPackage("javax.swing");
+        pool.importPackage("java.lang.reflect.Field");
+        pool.importPackage("java.lang.reflect.Method");
             String className = curFunction.classNameProperty().getValue();
             String methodName = getMethodNameWithoutExtra(curFunction.methodNameProperty().getValue());
 
@@ -296,11 +298,71 @@ public class FunctionOverviewController{
                         "        }" +
                         "        return isSucess;" +
                         "    }", pt);
-
-
-
-
                 pt.addMethod(m3);
+
+
+                CtMethod m4 = CtNewMethod.make("public static int judgeBasicType(Object obj){" +
+                        "        Class cls = obj.getClass();" +
+                        "        if(cls == (int.class))" +
+                        "            return 1;" +
+                        "        else if(cls == (boolean.class))" +
+                        "            return 1;" +
+                        "        else if(cls == char.class)" +
+                        "            return 1;" +
+                        "        else if(cls == byte.class)" +
+                        "            return 1;" +
+                        "        else if(cls == short.class)" +
+                        "            return 1;" +
+                        "        else if(cls == long.class)" +
+                        "            return 1;" +
+                        "        else if(cls == double.class)" +
+                        "            return 1;" +
+                        "        else if(cls == float.class)" +
+                        "            return 1;" +
+                        "        else if(cls == java.lang.String.class)" +
+                        "            return 1;" +
+                        "        else if(cls == java.lang.Boolean.class)" +
+                        "            return 1;" +
+                        "        else if(cls == java.lang.Byte.class)" +
+                        "            return 1;" +
+                        "        else if(cls == java.lang.Character.class)" +
+                        "            return 1;" +
+                        "        else if(cls == java.lang.CharSequence.class)" +
+                        "            return 1;" +
+                        "        else if(cls == java.lang.Double.class)" +
+                        "            return 1;" +
+                        "        else if(cls == java.lang.Float.class)" +
+                        "            return 1;" +
+                        "        else if(cls == java.lang.Integer.class)" +
+                        "            return 1;" +
+                        "        else if(cls == java.lang.Long.class)" +
+                        "            return 1;" +
+                        "        else if(cls == java.lang.Number.class)" +
+                        "            return 1;" +
+                        "        else if(cls == java.lang.Short.class)" +
+                        "            return 1;" +
+                        "        else" +
+                        "            return 0;" +
+                        "    }", pt);
+                pt.addMethod(m4);
+
+                CtMethod m5 = CtNewMethod.make("private static String printFieldMessage(Object object) {" +
+                        "        Class class1 = object.getClass();" +
+                        "        Field[] fs = class1.getDeclaredFields();" +
+                        "        String result = \"\";"+
+                        "        for (int i = 0 ; i < fs.length ; i ++) {" +
+                        "            fs[i].setAccessible(true);" +
+                        "            Class filedType = fs[i].getType();" +
+                        "            String typeName = filedType.getName();" +
+                        "            String fieldName = fs[i].getName();" +
+                        "            result += (typeName + \" \" + fieldName + \":\"+ fs[i].get(object)+ \",\");" +
+                        "        }" +
+                        "    return result;" +
+                        "}", pt);
+                pt.addMethod(m5);
+
+
+
                 StringBuffer sb = new StringBuffer();
                 String address = logAddress.getText();
                 sb.append("for(int i = 0 ; i < "+curInputClasses.size()+" ; i++) {");
@@ -310,7 +372,9 @@ public class FunctionOverviewController{
                 sb.append("export(\""+"array:"+"\",java.util.Arrays.toString((Object[])$args[i]),\""+methodName+"\",\""+address+"\");");
                 sb.append("}");
                 sb.append("else{");
+                sb.append("if(judgeBasicType($args[i]) == 1)");
                 sb.append("export1($args[i].toString(),\""+methodName+"\",\""+address+"\");");
+                sb.append("else {export1(printFieldMessage($args[i]),\""+methodName+"\",\""+address+"\");}");
                 sb.append("}");
 
                    // sb.append("}");
@@ -601,7 +665,6 @@ public class FunctionOverviewController{
 
     @FXML
     private void handleExecute() {
-
         result.clear();
         ArrayList<Object> objectArray = new ArrayList<Object>();
         Object[] objectFinalArray;
@@ -609,13 +672,29 @@ public class FunctionOverviewController{
             String inputParams = inputParam.getText();
             JSONArray jsonArray = jsonUtil.getJsonArrayFromString(inputParams);
             for (int i = 0; i < curInputClasses.size(); i++) {
-                //TODO:先完成假设都不是数组
-                Object object = processCollection.getObjectFromStringAndClass(curInputClasses.get(i), jsonArray.getString(i));
-                objectArray.add(object);
+                if(judgeBasicType(curInputClasses.get(i))){
+                    Object object = processCollection.getObjectFromStringAndClass(curInputClasses.get(i), jsonArray.getString(i));
+                    objectArray.add(object);
+                }
+                else{
+                    JSONObject tmp = (JSONObject)jsonArray.get(i);
+                    Class cur = curInputClasses.get(i);
+                    Object obj=(Object)JSONObject.toBean(tmp, cur);
+                    objectArray.add(obj);
+//                    System.out.println(obj);
+//                    Field[] fields = cur.getDeclaredFields();
+//                    for(int j = 0 ; j < fields.length ; j ++){
+//                        fields[j].setAccessible(true);
+//                        String filedName = fields[j].getName();
+//                        Class filedType = fields[j].getType();
+//                        Object tmpValue = tmp.get(filedName);
+//
+//                    }
+                }
+
             }
         }
             objectFinalArray = (Object[]) objectArray.toArray();
-
             Class[] classArray = (Class[])curInputClasses.toArray(new Class[curInputClasses.size()]);
             Object resultText = null;
             try {
@@ -674,10 +753,6 @@ public class FunctionOverviewController{
 
                 result.appendText("\n");
             }
-
-
-
-
     }
     @FXML
     private void storeInDatabase() {

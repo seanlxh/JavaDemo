@@ -1,14 +1,12 @@
 package javaDemo.view;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import javaDemo.MainApp;
 import javaDemo.model.Function;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -19,10 +17,9 @@ import javax.swing.text.TableView;
 import javax.swing.text.html.ListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import static javaDemo.util.processCollection.getMethodNameWithoutExtra;
-import static javaDemo.util.processCollection.getMethodParamNames;
-import static javaDemo.util.processCollection.getParaTypeFromMethod;
+import static javaDemo.util.processCollection.*;
 
 public class LogicPage {
     private MainApp mainApp;
@@ -43,10 +40,25 @@ public class LogicPage {
     @FXML
     private TreeView<String> processResult;
 
+    @FXML
+    private javafx.scene.control.ListView<String> paraList;
+
+    @FXML
+    private TextField paraContent;
+
+
     int num = 1;
 
 
-    TreeItem<String> rootNode;
+    public TreeItem<String> rootNode;
+
+    public HashMap<TreeItem<String>,Integer> treeItemObjectHashMap = new HashMap<TreeItem<String>,Integer>();
+
+    public HashMap<TreeItem<String>,Boolean> treeItemBooleanHashMap = new HashMap<TreeItem<String>,Boolean>();
+
+    public HashMap<TreeItem<String>,Object> treeItemObjectHashMap1 = new HashMap<TreeItem<String>,Object>();
+
+    public ArrayList<Object> funcResult = new ArrayList<Object>();
 
     public static final ObservableList names =
             FXCollections.observableArrayList();
@@ -74,7 +86,7 @@ public class LogicPage {
     private void addFunction(){
         Function selectedFunction = functionTabel1.getSelectionModel().getSelectedItem();
         TreeItem newFunction =
-                new TreeItem<>(num +" "+ selectedFunction.classNameProperty().getValue()+"."+getMethodNameWithoutExtra(selectedFunction.methodNameProperty().getValue()));
+                new TreeItem<>(num +" "+ selectedFunction.classNameProperty().getValue()+"."+getMethodNameWithoutExtra(selectedFunction.methodNameProperty().getValue())+" 类型："+selectedFunction.enableNameProperty().getValue());
         ClassPool pool = ClassPool.getDefault();
         CtClass pt = null;
         ArrayList<String> paraTypes = getParaTypeFromMethod(selectedFunction.methodNameProperty().getValue());
@@ -112,12 +124,15 @@ public class LogicPage {
                 int tmpInt = Integer.valueOf(tmpStrings[0]) - 1;
                 rootNode.getChildren().get(i).setValue(String.valueOf(tmpInt) + " " + tmpStrings[1]);
             }
-
-
             rootNode.getChildren().remove(tmp);
-
             num--;
             processResult.getSelectionModel().select(indexOfRemove);
+            if(treeItemObjectHashMap.containsKey(tmp))
+                treeItemObjectHashMap.remove(tmp);
+            if(treeItemObjectHashMap1.containsKey(tmp))
+                treeItemObjectHashMap1.remove(tmp);
+            if(treeItemBooleanHashMap.containsKey(tmp))
+                treeItemBooleanHashMap.remove(tmp);
         }
     }
 
@@ -156,6 +171,70 @@ public class LogicPage {
             rootNode.getChildren().set(indexOfDown,tmp);
             rootNode.getChildren().set(indexOfDown - 1,downItem);
             processResult.getSelectionModel().select(indexOfDown + 1);
+        }
+    }
+
+    @FXML
+    private void infoFunction(){
+        if(processResult.getSelectionModel().getSelectedItem().getParent().equals(rootNode)){
+            TreeItem<String> indexNode =  processResult.getSelectionModel().getSelectedItem();
+            int indexOfInfo = 0;
+            for(indexOfInfo = 0 ; rootNode.getChildren().get(indexOfInfo) != indexNode ; indexOfInfo ++);
+            ObservableList<String> items =FXCollections.observableArrayList ();
+            for(int i = 0 ; i < indexOfInfo ; i ++){
+                String[] typeStrings = rootNode.getChildren().get(i).getValue().split(" ");
+                String typeName = typeStrings[2].substring(3);
+                if(!typeName.equals("void")){
+                    items.add(typeStrings[0]+" "+ typeStrings[1] + typeStrings[2]);
+                }
+            }
+            paraList.setItems(items);
+        }
+    }
+
+    @FXML
+    private void addParaFunction(){
+        TreeItem<String> tmp =  processResult.getSelectionModel().getSelectedItem();
+        if(rootNode.getChildren().contains(tmp.getParent())){
+            String[] nums = paraList.getSelectionModel().getSelectedItem().split(" ");
+            int funNum = Integer.valueOf(nums[0]);
+            if(funNum < Integer.valueOf(tmp.getParent().getValue().split(" ")[0])){
+                treeItemObjectHashMap.put(tmp,funNum);
+                tmp.setValue(tmp.getValue().split("->")[0]+"->"+nums[0]+nums[1]);
+                treeItemBooleanHashMap.put(tmp,true);
+            }
+        }
+    }
+
+    @FXML
+    private void addPara(){
+        TreeItem<String> tmp =  processResult.getSelectionModel().getSelectedItem();
+        if(rootNode.getChildren().contains(tmp.getParent())){
+            String para = paraContent.getText();
+            Class tmpClass = getClassFromName(para);
+            Object tmpObj = getObjectFromStringAndClass(tmpClass,para);
+            treeItemObjectHashMap1.put(tmp,tmpObj);
+            tmp.setValue(tmp.getValue().split("->")[0]+"->"+para);
+            treeItemBooleanHashMap.put(tmp,false);
+        }
+    }
+
+    @FXML
+    private void getLogicData(){
+        funcResult.clear();
+        for(int i = 0 ; i < rootNode.getChildren().size() ; i ++){
+            String content = rootNode.getChildren().get(i).getValue();
+            String[] strings = content.split(" ");
+            String classAndMethod = strings[1];
+            String[] splitClassAndMethods = classAndMethod.split("\\.");
+            String className = "";
+            String methodName = "";
+            for(int j = 0 ; j < splitClassAndMethods.length - 1 ; j ++){
+                className += (splitClassAndMethods[j]+".");
+            }
+            methodName = splitClassAndMethods[splitClassAndMethods.length-1];
+            className = className.substring(0,className.length()-1);
+            System.out.println(methodName+className);
         }
     }
 

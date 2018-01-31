@@ -12,12 +12,12 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="functionTabel1" layoutX="23.0" layoutY="67.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="functionTabel1" layoutX="23.0" layoutY="67.0" prefHeight="1198.0" prefWidth="303.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                        <TableColumn fx:id="levelColumn" prefWidth="75.0" text="Column X" />
-                      <TableColumn fx:id="classNameColumn" prefWidth="75.0" text="C1" />
-                      <TableColumn fx:id="methodNameColumn" prefWidth="75.0" text="C2" />
-                        <TableColumn fx:id="enableNameColumn" prefWidth="75.0" text="Column X" />
+                        <TableColumn fx:id="levelColumn" prefWidth="75.0" text="level" />
+                      <TableColumn fx:id="classNameColumn" prefWidth="75.0" text="Class" />
+                      <TableColumn fx:id="methodNameColumn" prefWidth="75.0" text="Method" />
+                        <TableColumn fx:id="enableNameColumn" prefWidth="75.0" text="Return" />
                     </columns>
                   </TableView>
                </children>
@@ -29,8 +29,14 @@
                   <Button layoutX="144.0" layoutY="559.0" mnemonicParsing="false" onAction="#removeFunction" prefHeight="27.0" prefWidth="72.0" text="Remove" />
                   <Button layoutX="248.0" layoutY="559.0" mnemonicParsing="false" onAction="#upFunction" prefHeight="27.0" prefWidth="72.0" text="Up" />
                   <Button layoutX="351.0" layoutY="559.0" mnemonicParsing="false" onAction="#downFunction" prefHeight="27.0" prefWidth="72.0" text="Down" />
-                  <ListView layoutX="460.0" layoutY="107.0" prefHeight="268.0" prefWidth="200.0" />
-                  <Button layoutX="527.0" layoutY="415.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" text="Add" />
+                  <ListView fx:id="paraList" layoutX="460.0" layoutY="160.0" prefHeight="268.0" prefWidth="200.0" AnchorPane.rightAnchor="27.0" />
+                  <Button layoutX="573.0" layoutY="468.0" mnemonicParsing="false" onAction="#addParaFunction" prefHeight="27.0" prefWidth="62.0" text="Add" AnchorPane.rightAnchor="52.0" />
+                  <Button layoutX="485.0" layoutY="468.0" mnemonicParsing="false" onAction="#infoFunction" prefHeight="27.0" prefWidth="62.0" text="Info" AnchorPane.rightAnchor="140.0" />
+                  <TextField fx:id="paraContent" layoutX="460.0" layoutY="65.0" prefHeight="27.0" prefWidth="200.0" AnchorPane.rightAnchor="27.0" />
+                  <Button layoutX="531.0" layoutY="104.0" mnemonicParsing="false" onAction="#addPara" text="Add" AnchorPane.rightAnchor="113.0" />
+                  <TextField layoutX="507.0" layoutY="559.0" />
+                  <Label layoutX="469.0" layoutY="564.0" text="addr:" />
+                  <Button layoutX="604.0" layoutY="599.0" mnemonicParsing="false" onAction="#getLogicData" text="Run" />
                </children></AnchorPane>
         </items>
       </SplitPane>

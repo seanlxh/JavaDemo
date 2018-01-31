@@ -47,11 +47,11 @@
                            <children>
                               <Label text="File Addr:" />
                               <Label text="num:" GridPane.columnIndex="2" />
-                              <TextField fx:id="fileAddress" prefHeight="38.0" prefWidth="323.0" text="Call_Tracer_.csv" GridPane.columnIndex="1" />
+                              <TextField fx:id="fileAddress" prefHeight="38.0" prefWidth="323.0" text="Call_Tracer_testtest.csv" GridPane.columnIndex="1" />
                               <SplitPane dividerPositions="0.5" GridPane.columnIndex="3">
                                  <items>
-                                    <TextField fx:id="numLeft" GridPane.columnIndex="3" />
-                                    <TextField fx:id="numRight" prefHeight="27.0" prefWidth="89.0" GridPane.columnIndex="3" />
+                                    <TextField fx:id="numLeft" text="1" GridPane.columnIndex="3" />
+                                    <TextField fx:id="numRight" prefHeight="27.0" prefWidth="89.0" text="1" GridPane.columnIndex="3" />
                                  </items>
                               </SplitPane>
                               <Label text="input:" GridPane.rowIndex="1" />

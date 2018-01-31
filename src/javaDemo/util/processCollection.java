@@ -152,6 +152,7 @@ public class processCollection {
 
     }
 
+
     public static Boolean judgeBasicType(Object obj){
         Class cls = obj.getClass();
         if(cls == (int.class))
