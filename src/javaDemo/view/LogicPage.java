@@ -15,9 +15,11 @@ import javassist.NotFoundException;
 
 import javax.swing.text.TableView;
 import javax.swing.text.html.ListView;
+import javax.swing.tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static javaDemo.util.processCollection.*;
 
@@ -234,7 +236,18 @@ public class LogicPage {
             }
             methodName = splitClassAndMethods[splitClassAndMethods.length-1];
             className = className.substring(0,className.length()-1);
-            System.out.println(methodName+className);
+
+            List paras =  rootNode.getChildren().get(i).getChildren();
+            for(int k = 0 ; k < paras.size() ; k ++){
+                String singlePara = (String) ((TreeItem)paras.get(k)).getValue();
+                String[] paraInfo = singlePara.split(" ");
+                Class tmpClass = getClassFromName(paraInfo[0]);
+                Object tmpObj = getObjectFromStringAndClass(tmpClass,para);
+
+            }
+
+
+
         }
     }
 
