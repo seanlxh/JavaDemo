@@ -153,6 +153,56 @@ public class processCollection {
     }
 
 
+    public static Boolean judgeBasicTypeByName(Class obj){
+        Class cls = obj;
+        if(cls == (int.class))
+            return true;
+        else if(cls == (boolean.class))
+            return true;
+        else if(cls == char.class)
+            return true;
+        else if(cls == byte.class)
+            return true;
+        else if(cls == short.class)
+            return true;
+        else if(cls == long.class)
+            return true;
+        else if(cls == double.class)
+            return true;
+        else if(cls == float.class)
+            return true;
+        else if(cls == java.lang.String.class)
+            return true;
+        else if(cls == java.math.BigDecimal.class)
+            return true;
+        else if(cls == java.math.BigInteger.class)
+            return true;
+        else if(cls == java.lang.Boolean.class)
+            return true;
+        else if(cls == java.lang.Byte.class)
+            return true;
+        else if(cls == java.lang.Character.class)
+            return true;
+        else if(cls == java.lang.CharSequence.class)
+            return true;
+        else if(cls == java.lang.Double.class)
+            return true;
+        else if(cls == java.lang.Float.class)
+            return true;
+        else if(cls == java.lang.Integer.class)
+            return true;
+        else if(cls == java.lang.Long.class)
+            return true;
+        else if(cls == java.lang.Number.class)
+            return true;
+        else if(cls == java.lang.Short.class)
+            return true;
+        else if(cls.isArray())
+            return true;
+        else
+            return false;
+    }
+
     public static Boolean judgeBasicType(Object obj){
         Class cls = obj.getClass();
         if(cls == (int.class))
@@ -197,6 +247,8 @@ public class processCollection {
             return true;
         else if(cls == java.lang.Short.class)
             return true;
+        else if(cls.isArray())
+            return true;
         else
             return false;
     }
@@ -220,6 +272,11 @@ public class processCollection {
             return float.class;
         else if(className.contains("[ ]")){
             Class temp = getClassFromName(className.substring(0,className.length()-3));
+            Class result = Array.newInstance(temp, 1).getClass();
+            return result;
+        }
+        else if(className.contains("[]")){
+            Class temp = getClassFromName(className.substring(0,className.length()-2));
             Class result = Array.newInstance(temp, 1).getClass();
             return result;
         }
@@ -341,4 +398,10 @@ public class processCollection {
         }
         return paramNames;
     }
+
+
+
+
 }
+
+

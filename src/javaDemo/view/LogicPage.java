@@ -3,6 +3,8 @@ package javaDemo.view;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javaDemo.MainApp;
 import javaDemo.model.Function;
+import javaDemo.util.jsonUtil;
+import javaDemo.util.processCollection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,14 +14,15 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import javax.swing.text.TableView;
 import javax.swing.text.html.ListView;
 import javax.swing.tree.TreeNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static javaDemo.util.processCollection.*;
 
@@ -48,9 +51,13 @@ public class LogicPage {
     @FXML
     private TextField paraContent;
 
+    @FXML
+    private TextField storeAddr;
+
 
     int num = 1;
 
+    private static ArrayList<ArrayList<String>> listContent = new ArrayList<ArrayList<String>>();
 
     public TreeItem<String> rootNode;
 
@@ -59,6 +66,8 @@ public class LogicPage {
     public HashMap<TreeItem<String>,Boolean> treeItemBooleanHashMap = new HashMap<TreeItem<String>,Boolean>();
 
     public HashMap<TreeItem<String>,Object> treeItemObjectHashMap1 = new HashMap<TreeItem<String>,Object>();
+
+    public HashMap<Integer,Object> integerObjectHashMap = new HashMap<Integer,Object>();
 
     public ArrayList<Object> funcResult = new ArrayList<Object>();
 
@@ -149,8 +158,8 @@ public class LogicPage {
             TreeItem<String> upItem = rootNode.getChildren().get(indexOfUp - 2);
             String[] curStrings = tmp.getValue().split(" ");
             String[] upStrings = upItem.getValue().split(" ");
-            upItem.setValue(curStrings[0] + " " +upStrings[1]);
-            tmp.setValue(upStrings[0] + " " +curStrings[1]);
+            upItem.setValue(curStrings[0] + " " +upStrings[1]+" "+upStrings[2]);
+            tmp.setValue(upStrings[0] + " " +curStrings[1]+" "+curStrings[2]);
             rootNode.getChildren().set(indexOfUp - 2,tmp);
             rootNode.getChildren().set(indexOfUp - 1,upItem);
             processResult.getSelectionModel().select(indexOfUp - 1);
@@ -168,8 +177,8 @@ public class LogicPage {
             TreeItem<String> downItem = rootNode.getChildren().get(indexOfDown);
             String[] curStrings = tmp.getValue().split(" ");
             String[] downStrings = downItem.getValue().split(" ");
-            downItem.setValue(curStrings[0] + " " +downStrings[1]);
-            tmp.setValue(downStrings[0] + " " +curStrings[1]);
+            downItem.setValue(curStrings[0] + " " +downStrings[1]+" "+downStrings[2]);
+            tmp.setValue(downStrings[0] + " " +curStrings[1]+" "+curStrings[2]);
             rootNode.getChildren().set(indexOfDown,tmp);
             rootNode.getChildren().set(indexOfDown - 1,downItem);
             processResult.getSelectionModel().select(indexOfDown + 1);
@@ -213,8 +222,23 @@ public class LogicPage {
         TreeItem<String> tmp =  processResult.getSelectionModel().getSelectedItem();
         if(rootNode.getChildren().contains(tmp.getParent())){
             String para = paraContent.getText();
-            Class tmpClass = getClassFromName(para);
-            Object tmpObj = getObjectFromStringAndClass(tmpClass,para);
+            JSONArray jsonArray = jsonUtil.getJsonArrayFromString(para);
+            Class tmpClass;
+            if(tmp.getValue().contains("[ ]")){
+                tmpClass = getClassFromName(tmp.getValue().split("\\[")[0]+"[ ]");
+            }
+            else{
+                tmpClass = getClassFromName(tmp.getValue().split(" ")[0]);
+            }
+
+            Object tmpObj;
+            if(judgeBasicTypeByName(tmpClass)){
+                tmpObj = processCollection.getObjectFromStringAndClass(tmpClass, jsonArray.getString(0));
+            }
+            else{
+                JSONObject tmpStr = (JSONObject)jsonArray.get(0);
+                tmpObj = (Object)JSONObject.toBean(tmpStr, tmpClass);
+            }
             treeItemObjectHashMap1.put(tmp,tmpObj);
             tmp.setValue(tmp.getValue().split("->")[0]+"->"+para);
             treeItemBooleanHashMap.put(tmp,false);
@@ -224,30 +248,157 @@ public class LogicPage {
     @FXML
     private void getLogicData(){
         funcResult.clear();
-        for(int i = 0 ; i < rootNode.getChildren().size() ; i ++){
+        listContent.clear();
+        for(int i = 0 ; i < rootNode.getChildren().size() ; i ++) {
             String content = rootNode.getChildren().get(i).getValue();
             String[] strings = content.split(" ");
             String classAndMethod = strings[1];
             String[] splitClassAndMethods = classAndMethod.split("\\.");
             String className = "";
             String methodName = "";
-            for(int j = 0 ; j < splitClassAndMethods.length - 1 ; j ++){
-                className += (splitClassAndMethods[j]+".");
+            for (int j = 0; j < splitClassAndMethods.length - 1; j++) {
+                className += (splitClassAndMethods[j] + ".");
             }
-            methodName = splitClassAndMethods[splitClassAndMethods.length-1];
-            className = className.substring(0,className.length()-1);
+            methodName = splitClassAndMethods[splitClassAndMethods.length - 1];
+            className = className.substring(0, className.length() - 1);
 
-            List paras =  rootNode.getChildren().get(i).getChildren();
-            for(int k = 0 ; k < paras.size() ; k ++){
-                String singlePara = (String) ((TreeItem)paras.get(k)).getValue();
-                String[] paraInfo = singlePara.split(" ");
-                Class tmpClass = getClassFromName(paraInfo[0]);
-                Object tmpObj = getObjectFromStringAndClass(tmpClass,para);
+            List paras = rootNode.getChildren().get(i).getChildren();
 
+            ArrayList<Object> objectArray = new ArrayList<Object>();
+            ArrayList<Object> curInputClasses = new ArrayList<Object>();
+            Object[] objectFinalArray;
+
+            for (int k = 0; k < paras.size(); k++) {
+                String singlePara = (String) ((TreeItem) paras.get(k)).getValue();
+                Class tmpClass;
+                if (singlePara.contains("[ ]")) {
+                    tmpClass = getClassFromName(singlePara.split("\\[")[0] + "[ ]");
+                } else {
+                    tmpClass = getClassFromName(singlePara.split(" ")[0]);
+                }
+                curInputClasses.add(tmpClass);
+                Object tmpObj;
+                if (treeItemBooleanHashMap.get(paras.get(k)) == false) {
+                    tmpObj = treeItemObjectHashMap1.get(paras.get(k));
+                } else {
+                    int tmpIndex = treeItemObjectHashMap.get(paras.get(k));
+                    tmpObj = integerObjectHashMap.get(tmpIndex);
+                }
+                objectArray.add(tmpObj);
+            }
+
+            objectFinalArray = (Object[]) objectArray.toArray();
+            Class[] classArray = (Class[]) curInputClasses.toArray(new Class[curInputClasses.size()]);
+
+
+            Object resultText = null;
+            try {
+                resultText = processCollection.execute(className,
+                        methodName + "()", classArray, objectFinalArray);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (resultText != null) {
+                Collection collection = setItems(resultText);
+                integerObjectHashMap.put(i + 1, resultText);
+                listContent.add(new ArrayList<String>());
+                listContent.get(listContent.size() - 1).add("第" + String.valueOf(i + 1) + "个：");
+                if (collection != null) {
+                    Iterator it = collection.iterator();
+                    while (it.hasNext()) {
+                        listContent.add(new ArrayList<String>());
+                        Object obj = it.next();
+                        Collection collection1 = setItems(obj);
+                        if (collection1 != null) {
+                            ArrayList<Object> tmp = new ArrayList<Object>(collection1);
+                            for (int m = 0; m < tmp.size(); m++) {
+                                Object value = tmp.get(m);
+                                if (processCollection.judgeBasicType(value)) {
+                                    //result.appendText(value.toString()+" ");
+                                    listContent.get(listContent.size() - 1).add(value.toString());
+                                } else {
+                                    //result.appendText(ReflectionToStringBuilder.toString(value)+" ");
+                                    listContent.get(listContent.size() - 1).add(ReflectionToStringBuilder.toString(value));
+                                }
+                            }
+                            //result.appendText("\n");
+                        } else {
+                            listContent.add(new ArrayList<String>());
+                            if (processCollection.judgeBasicType(obj)) {
+                                //result.appendText(obj.toString()+" ");
+                                listContent.get(listContent.size() - 1).add(obj.toString());
+                            } else {
+                                //result.appendText(ReflectionToStringBuilder.toString(obj)+" ");
+                                listContent.get(listContent.size() - 1).add(ReflectionToStringBuilder.toString(obj));
+                            }
+                            //result.appendText("\n");
+                        }
+//                    String[] tmp1 = (String[])it.next();
+                    }
+                } else {
+                    listContent.add(new ArrayList<String>());
+                    if (processCollection.judgeBasicType(resultText)) {
+                        //result.appendText(resultText.toString()+" ");
+                        listContent.get(listContent.size() - 1).add(resultText.toString());
+                    } else {
+                        //result.appendText(ReflectionToStringBuilder.toString(resultText)+" ");
+                        listContent.get(listContent.size() - 1).add(ReflectionToStringBuilder.toString(resultText));
+                    }
+
+                    //result.appendText("\n");
+                }
+                }
             }
 
 
 
+        boolean isSucess=false;
+        java.io.FileOutputStream out=null;
+        java.io.OutputStreamWriter osw=null;
+        java.io.BufferedWriter bw=null;
+        try {
+            out = new java.io.FileOutputStream(storeAddr.getText(),true);
+            osw = new java.io.OutputStreamWriter(out,"utf-8");
+            bw =new java.io.BufferedWriter(osw);
+
+            for(int i = 0 ; i < listContent.size() ; i ++){
+                String a =  "";
+                for(int j = 0 ; j < listContent.get(i).size() ; j ++){
+                    a += listContent.get(i).get(j)+"',";
+
+                }
+                bw.append(a).append("\n");
+            }
+
+            isSucess=true;
+
+        } catch (Exception e) {
+            isSucess=false;
+        }finally{
+            if(bw!=null){
+                try {
+                    bw.close();
+                    bw=null;
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(osw!=null){
+                try {
+                    osw.close();
+                    osw=null;
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(out!=null){
+                try {
+                    out.close();
+                    out=null;
+                } catch (java.io.IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -266,4 +417,10 @@ public class LogicPage {
         enableNameColumn.setCellValueFactory(
                 cellData -> cellData.getValue().enableNameProperty());
     }
+
+
+
+
+
+
 }

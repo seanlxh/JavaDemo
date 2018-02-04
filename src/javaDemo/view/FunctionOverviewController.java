@@ -672,7 +672,7 @@ public class FunctionOverviewController{
             String inputParams = inputParam.getText();
             JSONArray jsonArray = jsonUtil.getJsonArrayFromString(inputParams);
             for (int i = 0; i < curInputClasses.size(); i++) {
-                if(judgeBasicType(curInputClasses.get(i))){
+                if(judgeBasicTypeByName(curInputClasses.get(i))){
                     Object object = processCollection.getObjectFromStringAndClass(curInputClasses.get(i), jsonArray.getString(i));
                     objectArray.add(object);
                 }
