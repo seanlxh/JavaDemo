@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaDemo.view.ConnectDBPageController">
+   <children>
+      <TreeView fx:id="processResult" layoutX="32.0" layoutY="27.0" prefHeight="594.0" prefWidth="253.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="315.0" />
+      <TextField fx:id="logAddr" layoutX="386.0" layoutY="51.0" text="Events.csv" AnchorPane.rightAnchor="47.0" />
+      <Label layoutX="315.0" layoutY="56.0" text="Log Addr" AnchorPane.rightAnchor="228.0" />
+      <TextField fx:id="paras" layoutX="363.0" layoutY="165.0" prefHeight="27.0" prefWidth="213.0" AnchorPane.rightAnchor="24.0" />
+      <Label layoutX="329.0" layoutY="170.0" text="Sql" AnchorPane.rightAnchor="251.0" />
+      <Button layoutX="493.0" layoutY="210.0" mnemonicParsing="false" onAction="#getData" prefHeight="27.0" prefWidth="52.0" text="Run" AnchorPane.rightAnchor="55.0" />
+      <Button layoutX="379.0" layoutY="210.0" mnemonicParsing="false" onAction="#initTable" text="Show" AnchorPane.rightAnchor="169.0" />
+      <TextArea fx:id="resultContent" layoutX="343.0" layoutY="259.0" prefHeight="263.0" prefWidth="200.0" AnchorPane.rightAnchor="57.0" />
+      <TextField fx:id="FileAddr" layoutX="368.0" layoutY="570.0" text="/Users/seanlxh/Downloads/result.csv" AnchorPane.rightAnchor="65.0" />
+      <Button layoutX="493.0" layoutY="629.0" mnemonicParsing="false" onAction="#storeInDatabase" prefHeight="27.0" prefWidth="52.0" text="Store" AnchorPane.rightAnchor="55.0" />
+      <TextField fx:id="userName" layoutX="349.0" layoutY="110.0" prefHeight="27.0" prefWidth="82.0" AnchorPane.rightAnchor="169.0" />
+      <TextField fx:id="password" layoutX="470.0" layoutY="110.0" prefHeight="27.0" prefWidth="88.0" AnchorPane.rightAnchor="42.0" />
+      <Label layoutX="286.0" layoutY="115.0" text="username" AnchorPane.rightAnchor="253.0" />
+      <Label layoutX="438.0" layoutY="115.0" text="Pwd" AnchorPane.rightAnchor="135.0" />
+      <Label layoutX="298.0" layoutY="575.0" text="File Addr" AnchorPane.rightAnchor="247.0" />
+   </children>
+</AnchorPane>

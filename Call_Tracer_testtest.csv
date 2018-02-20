@@ -2,6 +2,12 @@
 "main","TestBean.main(java.lang.String[ ])","false",0
 "main","Employ.<init>()","true",1004
 "main","TestBean.aaa(Employ)","false",1025
-"main","TestBean.aaa(Employ)","true",2404
 "main","TestBean.bbb(int)","false",2441
+"main","TestBean.ccc(int)","false",2441
+"main","TestBean.ccc(int)","true",2521
 "main","TestBean.bbb(int)","true",2521
+"main","TestBean.ddd(int)","false",2441
+"main","TestBean.ddd(int)","true",2521
+"main","TestBean.aaa(Employ)","true",2404
+"main","TestBean.eee(Employ)","false",1025
+"main","TestBean.eee(Employ)","true",2404

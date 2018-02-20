@@ -33,4 +33,18 @@ public class RootLayout {
         controller.setMainApp(this.mainApp);
     }
 
+    @FXML
+    private void handleDB() throws IOException {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("ConnectDBPage.fxml"));
+        AnchorPane target = (AnchorPane)loader.load();
+        Scene scene = new Scene(target); //创建场景；
+        Stage stg=new Stage();//创建舞台；
+        stg.setScene(scene); //将场景载入舞台；
+        stg.show(); //显示窗口；
+       // LogicPage controller = loader.getController();
+       // controller.setMainApp(this.mainApp);
+    }
+
 }

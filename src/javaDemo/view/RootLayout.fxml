@@ -10,9 +10,10 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Function">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleLogic" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#handleLogic" text="LogicData" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleDB" text="connectDB" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

@@ -47,11 +47,11 @@
                            <children>
                               <Label text="File Addr:" />
                               <Label text="num:" GridPane.columnIndex="2" />
-                              <TextField fx:id="fileAddress" prefHeight="38.0" prefWidth="323.0" text="Call_Tracer_testtest.csv" GridPane.columnIndex="1" />
+                              <TextField fx:id="fileAddress" prefHeight="38.0" prefWidth="323.0" text="Call_Tracer_goodsData.csv" GridPane.columnIndex="1" />
                               <SplitPane dividerPositions="0.5" GridPane.columnIndex="3">
                                  <items>
-                                    <TextField fx:id="numLeft" text="1" GridPane.columnIndex="3" />
-                                    <TextField fx:id="numRight" prefHeight="27.0" prefWidth="89.0" text="1" GridPane.columnIndex="3" />
+                                    <TextField fx:id="numLeft" text="4" GridPane.columnIndex="3" />
+                                    <TextField fx:id="numRight" prefHeight="27.0" prefWidth="89.0" text="4" GridPane.columnIndex="3" />
                                  </items>
                               </SplitPane>
                               <Label text="input:" GridPane.rowIndex="1" />
@@ -148,10 +148,13 @@
                               <Label text="Paging data" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
-                        <Button layoutX="308.0" layoutY="669.0" mnemonicParsing="false" onAction="#handleAnalysis" text="analyse" />
-                        <Button layoutX="464.0" layoutY="669.0" mnemonicParsing="false" onAction="#handleExecute" prefHeight="27.0" prefWidth="72.0" text="execute" />
-                        <Button layoutX="552.0" layoutY="669.0" mnemonicParsing="false" onAction="#storeInDatabase" prefHeight="27.0" prefWidth="59.0" text="store" />
-                        <Button layoutX="385.0" layoutY="669.0" mnemonicParsing="false" onAction="#handleFilter" prefHeight="27.0" prefWidth="65.0" text="filter" />
+                        <Button layoutX="308.0" layoutY="669.0" mnemonicParsing="false" onAction="#handleAnalysis" text="analyse" AnchorPane.topAnchor="600.0" />
+                        <Button layoutX="464.0" layoutY="669.0" mnemonicParsing="false" onAction="#handleExecute" prefHeight="27.0" prefWidth="72.0" text="execute" AnchorPane.topAnchor="600.0" />
+                        <Button layoutX="552.0" layoutY="669.0" mnemonicParsing="false" onAction="#storeInDatabase" prefHeight="27.0" prefWidth="59.0" text="store" AnchorPane.topAnchor="600.0" />
+                        <Button layoutX="385.0" layoutY="669.0" mnemonicParsing="false" onAction="#handleFilter" prefHeight="27.0" prefWidth="65.0" text="filter" AnchorPane.topAnchor="600.0" />
+                        <Button layoutX="391.0" layoutY="650.0" mnemonicParsing="false" onAction="#JDBCDriver" text="JDBCDriver" />
+                        <TextField fx:id="JDBCLogAddr" layoutX="74.0" layoutY="650.0" prefHeight="27.0" prefWidth="276.0" text="/Users/seanlxh/export2.csv" />
+                        <Label layoutX="7.0" layoutY="655.0" text="Log Addr" />
                      </children>
                   </AnchorPane>
                </children></AnchorPane>

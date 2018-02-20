@@ -83,6 +83,9 @@ public class FunctionOverviewController{
     private TextField muiltInputParam;
 
     @FXML
+    private TextField JDBCLogAddr;
+
+    @FXML
     private Label inputType;
 
     @FXML
@@ -97,6 +100,15 @@ public class FunctionOverviewController{
     @FXML
     private TextArea result;
 
+    public String getResultCode() {
+        return resultCode;
+    }
+
+    public void setResultCode(String resultCode) {
+        this.resultCode = resultCode;
+    }
+
+    public static String resultCode = "";
 
 
     private Function curFunction;
@@ -148,11 +160,16 @@ public class FunctionOverviewController{
 
     @FXML
     private void handleAnalysis() {
+        resultCode = "";
+        ArrayList<String> tmpmidClassAndFunction = new ArrayList<String>();
+        ArrayList<String> tmpClassAndFunction = new ArrayList<String>();
+        try{
         mainApp.getFunctionData().clear();
         if (isAnalysisInputValid()) {
             Service service = new Service();
-            ArrayList<String> tmpClassAndFunction = service.
+            tmpmidClassAndFunction = service.
                     getFunctionList(Integer.parseInt(numLeft.getText()),Integer.parseInt(numRight.getText()),fileAddress.getText());
+            service.reverseList(tmpmidClassAndFunction,tmpClassAndFunction,1,0);
             ArrayList<String> classAndFunction = new  ArrayList<String>();
             for (String cd:tmpClassAndFunction) {
                 if(!classAndFunction.contains(cd)){
@@ -179,6 +196,39 @@ public class FunctionOverviewController{
             }
 
         }
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.getDialogPane().setId("invalidCategoryAlert");
+            alert.getDialogPane().lookupButton(ButtonType.OK).setId("invalidCategoryAlertOkButton");
+            alert.setTitle("Finish");
+            if(tmpClassAndFunction.isEmpty()){
+                if(resultCode.length() == 0){
+                    resultCode = "无法读取";
+                }
+                alert.setHeaderText(resultCode);
+                alert.setContentText(resultCode);
+            }else{
+                alert.setHeaderText("success");
+                alert.setContentText("success");
+            }
+
+            ButtonType buttonTypeOk = new ButtonType("OK", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(buttonTypeOk);
+            alert.showAndWait();
+        }
+        catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.getDialogPane().setId("invalidCategoryAlert");
+            alert.getDialogPane().lookupButton(ButtonType.OK).setId("invalidCategoryAlertOkButton");
+            alert.setTitle("Finish");
+            alert.setHeaderText("Error");
+            alert.setContentText("Error");
+            ButtonType buttonTypeOk = new ButtonType("OK", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(buttonTypeOk);
+            alert.showAndWait();
+        }
+
+
     }
 
     @FXML
@@ -194,18 +244,138 @@ public class FunctionOverviewController{
         }
 
     @FXML
+    private void JDBCDriver(){
+        ClassPool pool = ClassPool.getDefault();
+        pool.importPackage("java.lang.reflect.Field");
+        String className = curFunction.classNameProperty().getValue();
+        // String packageName = getClassFromName(className).getPackage().getName();
+        String packageName = getClassFromName(className).getProtectionDomain().getCodeSource().getLocation().getPath();
+        System.out.println(packageName);
+        String methodName = getMethodNameWithoutExtra(curFunction.methodNameProperty().getValue());
+        String address = JDBCLogAddr.getText();
+        CtClass cc1 = null;
+        try {
+            cc1 = pool.get(className);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            CtField f = CtField.make("static StringBuffer sb = new StringBuffer();", cc1);
+            cc1.addField(f);
+
+            CtMethod m2 = CtNewMethod.make("private static void getParamAndValue(java.lang.Object clazs, java.lang.Class clazz,boolean isOutputNull) {" +
+                    "        java.lang.Class sc = clazz.getSuperclass();" +
+                    "        sb = new StringBuffer();"+
+                    "        Field[] sfields = sc.getDeclaredFields();" +
+                    "        if (sfields.length > 0) {" +
+                    "            getParamAndValue(clazs, sc, isOutputNull);" +
+                    "        }" +
+                    "        Field[] fields = clazz.getDeclaredFields();" +
+                    "        for (int i = 0 ; i < fields.length; i ++) {" +
+                    "            fields[i].setAccessible(true);" +
+                    "            try {" +
+                    "                if (null != fields[i].get(clazs)||isOutputNull){" +
+                    "                    if(fields[i].getName().equals(\"user\")||fields[i].getName().equals(\"password\"))" +
+                    "                    sb.append(fields[i].getName() + \",\" + fields[i].get(clazs) + \"\\n\");" +
+                    "                }" +
+                    "            } catch (Exception e) {" +
+                    "                e.printStackTrace();" +
+                    "            }" +
+                   "        }" +
+                    "    }", cc1);
+            cc1.addMethod(m2);
+            CtMethod m1 = CtNewMethod.make("public static String toStringUtil(Object clazs,boolean isOutputNull) {" +
+                            "getParamAndValue(clazs, clazs.getClass(), isOutputNull);" +
+                            "return sb.toString();" +
+                            "}"
+                    , cc1);
+            cc1.addMethod(m1);
+
+
+            StringBuffer sb = new StringBuffer();
+
+            sb.append("boolean isSucess=false;" +
+                    " java.io.FileOutputStream out=null;" +
+                    " java.io.OutputStreamWriter osw=null;" +
+                    " java.io.BufferedWriter bw=null;" +
+                    "        try {" +
+                    "            out = new java.io.FileOutputStream(\""+address+"\",true);" +
+                    "            osw = new java.io.OutputStreamWriter(out,\"UTF-8\");" +
+                    "            bw =new java.io.BufferedWriter(osw);" +
+                    "            Field[] fieldsss=this.getClass().getDeclaredFields();"+
+                    "            for(int i = 0 ; i < fieldsss.length; i ++){"+
+                    "            String a =  toStringUtil(conn,false);" +
+                    "            bw.append(a).append(\"\\n\");" +
+                    "            }"+
+                    "            isSucess=true;" +
+                    "} catch (Exception e) {" +
+                    "            isSucess=false;" +
+                    "        }finally{" +
+                    "            if(bw!=null){" +
+                    "                try {" +
+                    "                    bw.close();" +
+                    "                    bw=null;" +
+                    "                } catch (java.io.IOException e) {" +
+                    "                    e.printStackTrace();" +
+                    "                } " +
+                    "            }" +
+                    "            if(osw!=null){" +
+                    "                try {" +
+                    "                    osw.close();" +
+                    "                    osw=null;" +
+                    "                } catch (java.io.IOException e) {" +
+                    "                    e.printStackTrace();" +
+                    "                } " +
+                    "            }" +
+                    "            if(out!=null){" +
+                    "                try {" +
+                    "                    out.close();" +
+                    "                    out=null;" +
+                    "                } catch (java.io.IOException e) {" +
+                    "                    e.printStackTrace();" +
+                    "                } " +
+                    "            }" +
+                    "    }");
+
+            CtMethod m3 = cc1.getDeclaredMethod(methodName);
+            m3.setModifiers(Modifier.PUBLIC);
+            String code = sb.toString();
+            m3.insertAfter(code);
+            cc1.writeFile(classAdrField.getText());
+            cc1.defrost();
+            processCollection.showInfo("success","success");
+
+
+        } catch (CannotCompileException e) {
+            e.printStackTrace();
+            processCollection.showInfo("fail",e.getMessage());
+        } catch (NotFoundException e) {
+            processCollection.showInfo("fail",e.getMessage());
+        } catch (IOException e) {
+            processCollection.showInfo("fail",e.getMessage());
+        }
+
+
+    }
+
+    @FXML
     private void handleGetClassFile(){
         ClassPool pool = ClassPool.getDefault();
         pool.importPackage("javax.swing");
         pool.importPackage("java.lang.reflect.Field");
         pool.importPackage("java.lang.reflect.Method");
             String className = curFunction.classNameProperty().getValue();
+           // String packageName = getClassFromName(className).getPackage().getName();
+            String packageName = getClassFromName(className).getProtectionDomain().getCodeSource().getLocation().getPath();
+            System.out.println(packageName);
             String methodName = getMethodNameWithoutExtra(curFunction.methodNameProperty().getValue());
 
             CtClass pt = null;
             try {
                 pt = pool.get(className);
                 CtMethod m1 = pt.getDeclaredMethod(methodName);
+                m1.setModifiers(Modifier.PUBLIC);
                 CtMethod m2 = CtNewMethod.make("public static boolean export(String methodName , String params, String returnType,String Addr){" +
                         "boolean isSucess=false;" +
                         " java.io.FileOutputStream out=null;" +
@@ -393,6 +563,16 @@ public class FunctionOverviewController{
                 e.printStackTrace();
             }
 
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getDialogPane().setId("invalidCategoryAlert");
+        alert.getDialogPane().lookupButton(ButtonType.OK).setId("invalidCategoryAlertOkButton");
+        alert.setTitle("Finish");
+        alert.setHeaderText("Success");
+        alert.setContentText("jar包来源："+packageName);
+        ButtonType buttonTypeOk = new ButtonType("OK", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonTypeOk);
+        alert.showAndWait();
+
             // CtMethod m = CtNewMethod.make("public void xmove(int dx) {System.out.println(\"sdss\");}", pt);
 
 
@@ -409,7 +589,7 @@ public class FunctionOverviewController{
         contentArea.clear();
         String path = logAddress.getText();
         Csv csv = new Csv();
-        ArrayList<String> arrays = csv.readLog(path);
+        ArrayList<String> arrays = csv.readLog(path,false);
 
         for(int i = 0 ; i < arrays.size() ; i ++){
             contentArea.appendText(arrays.get(i)+"\n");
@@ -537,16 +717,8 @@ public class FunctionOverviewController{
                     }
                 }
             }
-
-
         }
-
     }
-
-
-
-
-
     @FXML
     private void handleMuiltInput(){
         muiltContent.clear();
@@ -658,11 +830,6 @@ public class FunctionOverviewController{
             }
         }
     }
-
-
-
-
-
     @FXML
     private void handleExecute() {
         result.clear();
@@ -807,6 +974,16 @@ public class FunctionOverviewController{
             }
         }
 
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getDialogPane().setId("invalidCategoryAlert");
+        alert.getDialogPane().lookupButton(ButtonType.OK).setId("invalidCategoryAlertOkButton");
+        alert.setTitle("Finish");
+        alert.setHeaderText("Success");
+        alert.setContentText("Success");
+        ButtonType buttonTypeOk = new ButtonType("OK", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonTypeOk);
+        alert.showAndWait();
+
 
 //        String tableName = tableNameField.getText();
 //        try {
@@ -853,6 +1030,7 @@ public class FunctionOverviewController{
         try {
             Class claz = Class.forName(stringPropertyToString(className));
 
+
             boolean isAbs = Modifier.isAbstract(claz.getModifiers()) ;
             if(isAbs){
                 //resultType.setText("abstract class");
@@ -878,15 +1056,19 @@ public class FunctionOverviewController{
             CtMethod cm  =  cc.getDeclaredMethod(getMethodNameWithoutExtra(stringPropertyToString(methodName)));
             MethodInfo methodInfo  =  cm.getMethodInfo();
             CodeAttribute codeAttribute  =  methodInfo.getCodeAttribute();
-            LocalVariableAttribute attr  =  (LocalVariableAttribute) codeAttribute.getAttribute(LocalVariableAttribute.tag);
-            String[] paramNames  =   new  String[cm.getParameterTypes().length];
-            int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;
-            for  ( int  i  =   0 ; i  <  paramNames.length; i ++ )
-                paramNames[i]  =  attr.variableName(i+pos);
-            for  ( int  i  =   0 ; i  <  paramNames.length; i ++ ) {
-                String content = resultType.getText();
-                content += (paramNames[i]+"/");
-                resultType.setText(content);
+            if(codeAttribute != null){
+                LocalVariableAttribute attr  =  (LocalVariableAttribute) codeAttribute.getAttribute(LocalVariableAttribute.tag);
+                String[] paramNames  =   new  String[cm.getParameterTypes().length];
+                int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;
+                if(attr != null){
+                    for  ( int  i  =   0 ; i  <  paramNames.length; i ++ )
+                        paramNames[i]  =  attr.variableName(i+pos);
+                    for  ( int  i  =   0 ; i  <  paramNames.length; i ++ ) {
+                        String content = resultType.getText();
+                        content += (paramNames[i]+"/");
+                        resultType.setText(content);
+                    }
+                }
             }
         } catch (NotFoundException e) {
             e.printStackTrace();

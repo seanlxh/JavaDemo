@@ -1,3 +1,6 @@
+/***
+ * 逻辑调用类
+ */
 package javaDemo.view;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
@@ -39,6 +42,7 @@ public class LogicPage {
 
     @FXML
     private TableColumn<Function,String> enableNameColumn;
+
     @FXML
     private javafx.scene.control.TableView<Function> functionTabel1;
 
@@ -86,6 +90,7 @@ public class LogicPage {
 
     @FXML
     private void initialize(){
+        rootNode.getChildren().clear();
         showClassAndMethodInTable();
 //        functionTabel.getSelectionModel().selectedItemProperty().addListener(
 //                (observable, oldValue, newValue) > showType(newValue));
@@ -97,7 +102,7 @@ public class LogicPage {
     private void addFunction(){
         Function selectedFunction = functionTabel1.getSelectionModel().getSelectedItem();
         TreeItem newFunction =
-                new TreeItem<>(num +" "+ selectedFunction.classNameProperty().getValue()+"."+getMethodNameWithoutExtra(selectedFunction.methodNameProperty().getValue())+" 类型："+selectedFunction.enableNameProperty().getValue());
+                new TreeItem<>(num +" "+ selectedFunction.classNameProperty().getValue()+"."+getMethodNameWithoutExtra(selectedFunction.methodNameProperty().getValue())+" 类型:"+selectedFunction.enableNameProperty().getValue());
         ClassPool pool = ClassPool.getDefault();
         CtClass pt = null;
         ArrayList<String> paraTypes = getParaTypeFromMethod(selectedFunction.methodNameProperty().getValue());
@@ -124,6 +129,9 @@ public class LogicPage {
 
     @FXML
     private void removeFunction(){
+        for(int i = 0 ; i < rootNode.getChildren().size() ; i ++ ){
+            rootNode.getChildren().get(i).setExpanded(false);
+        }
 
         TreeItem<String> tmp =  processResult.getSelectionModel().getSelectedItem();
         int indexOfRemove =  processResult.getSelectionModel().getSelectedIndex();
@@ -133,7 +141,7 @@ public class LogicPage {
                 String value = rootNode.getChildren().get(i).getValue();
                 String[] tmpStrings = value.split(" ");
                 int tmpInt = Integer.valueOf(tmpStrings[0]) - 1;
-                rootNode.getChildren().get(i).setValue(String.valueOf(tmpInt) + " " + tmpStrings[1]);
+                rootNode.getChildren().get(i).setValue(String.valueOf(tmpInt) + " " + tmpStrings[1]+ " " +tmpStrings[2]);
             }
             rootNode.getChildren().remove(tmp);
             num--;
@@ -400,9 +408,16 @@ public class LogicPage {
                 }
             }
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getDialogPane().setId("invalidCategoryAlert");
+        alert.getDialogPane().lookupButton(ButtonType.OK).setId("invalidCategoryAlertOkButton");
+        alert.setTitle("Finish");
+        alert.setHeaderText("Success");
+        alert.setContentText("Success");
+        ButtonType buttonTypeOk = new ButtonType("OK", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonTypeOk);
+        alert.showAndWait();
     }
-
-
     private void showClassAndMethodInTable(){
 
         classNameColumn.setCellValueFactory(
@@ -417,10 +432,4 @@ public class LogicPage {
         enableNameColumn.setCellValueFactory(
                 cellData -> cellData.getValue().enableNameProperty());
     }
-
-
-
-
-
-
 }

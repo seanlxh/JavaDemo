@@ -3,9 +3,11 @@ package javaDemo.service; /**
  * date 2017-11-10
  */
 
+import javaDemo.model.Function;
 import javaDemo.model.Node;
 import javaDemo.model.Tree;
 import javaDemo.model.charNone;
+import javaDemo.view.FunctionOverviewController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,8 +38,14 @@ public class Service {
 
         for(int i = 0 ; i < funtions.size() ; i ++) {
             // System.out.println(mp.get(funtions.get(i)));
-            if (mp.get(funtions.get(i)) < countLeft * 2 || mp.get(funtions.get(i)) > countRight * 2)
+            if (mp.get(funtions.get(i)) < countLeft * 2 || mp.get(funtions.get(i)) > countRight * 2){
+                if(mp.get(funtions.get(i)) < countLeft * 2){
+                    FunctionOverviewController.resultCode = "左边界过大";
+                }else if(mp.get(funtions.get(i)) > countRight * 2){
+                    FunctionOverviewController.resultCode = "右边界过小";
+                }
                 continue;
+            }
 
             boolean judgeCharNone = false;
             for (int m = 0; m < charNone.array.length; m++) {
@@ -45,10 +53,9 @@ public class Service {
                     judgeCharNone = true;
                     break;
                 }
-
             }
-            if(judgeCharNone)
-                continue;
+//            if(judgeCharNone)
+//                continue;
 
                 if (judges.get(i).equals("false")) {
 
@@ -177,5 +184,15 @@ public class Service {
                 cur_floor = cur_floor.brother;
             }
         return;
+    }
+
+    public void reverseList(ArrayList<String> data , ArrayList<String> reverseData, int target, int ceiling){
+        for(int i = data.size() - 1; i >= ceiling ; i --){
+            if(Integer.valueOf(data.get(i).split("\\)")[data.get(i).split("\\)").length-1]) == target){
+                reverseData.add(data.get(i));
+                data.remove(i);
+                reverseList(data, reverseData, target+1, i);
+            }
+        }
     }
 }

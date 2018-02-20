@@ -1,28 +1,63 @@
 package javaDemo.util;
 
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class JDBCUtil {
 
     public static String url = "jdbc:mysql://localhost:3306/javaTest?"
-            + "user=root&password=lxh960119&useUnicode=true&characterEncoding=UTF8";
+            + "useUnicode=true&characterEncoding=UTF8";
     public static Connection conn = null;
 
     public static Statement stmt = null;
 
-    public static void init() throws SQLException {
+    public static void init(String url, String driverName, String userName, String password) throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");// 动态加载mysql驱动
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         System.out.println("成功加载MySQL驱动程序");
-        conn = DriverManager.getConnection(url);
+        conn = DriverManager.getConnection(url,userName,password);
         stmt = conn.createStatement();
+    }
+
+    public static ArrayList<String> getResult(String sql){
+        ArrayList<String> result = new ArrayList<String>();
+        try {
+            ResultSet tmp = stmt.executeQuery(sql);// executeUpdate语句会返回一个受影响的行数，如果返回-1就没有成功
+            ResultSetMetaData rsmd = tmp.getMetaData() ;
+            int columnCount = rsmd.getColumnCount();
+            while (tmp.next()){
+                String content = "";
+                for(int i = 1 ; i <= columnCount; i ++){
+                    content += (tmp.getString(i)+" ");
+                }
+                result.add(new String(content));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                // 2.关闭连接
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     public static boolean createTable(String createTable , int columnNum){

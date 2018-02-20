@@ -1,6 +1,9 @@
 package javaDemo.util;
 
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
@@ -9,6 +12,7 @@ import javassist.bytecode.LocalVariableAttribute;
 import javassist.bytecode.MethodInfo;
 
 import java.lang.reflect.*;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -101,6 +105,8 @@ public class processCollection {
         Class[] classArray = (Class[])classes.toArray(new Class[classes.size()]);
 
         Method mth = obj.getClass().getDeclaredMethod(functionName1,classArray);
+
+        mth.setAccessible(true);
 
         Type t = mth.getAnnotatedReturnType().getType();
 
@@ -397,6 +403,18 @@ public class processCollection {
             paramNames[i] = attr.variableName(i + pos);
         }
         return paramNames;
+    }
+
+    public static void showInfo(String Header, String Content){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getDialogPane().setId("invalidCategoryAlert");
+        alert.getDialogPane().lookupButton(ButtonType.OK).setId("invalidCategoryAlertOkButton");
+        alert.setTitle("Finish");
+        alert.setHeaderText(Header);
+        alert.setContentText(Content);
+        ButtonType buttonTypeOk = new ButtonType("OK", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonTypeOk);
+        alert.showAndWait();
     }
 
 

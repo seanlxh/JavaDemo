@@ -1,0 +1,302 @@
+"Thread","Method","Exit","Time (microseconds)"
+"AWT-EventQueue-0","java.awt.EventDispatchThread.run()","false",0
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","false",0
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","false",0
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","true",2118
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","true",4610
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","false",389104
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","false",389113
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","true",389116
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","true",389124
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","false",591586
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","false",591594
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","true",591597
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","true",591600
+"AWT-EventQueue-0","com.up.student.view.LoginView$1.actionPerformed(java.awt.event.ActionEvent)","false",1414566
+"AWT-EventQueue-0","com.up.student.view.LoginView.access$100(com.up.student.view.LoginView)","false",1414579
+"AWT-EventQueue-0","com.up.student.view.LoginView.check()","false",1414584
+"AWT-EventQueue-0","com.up.student.DAO.<clinit>()","false",1417536
+"AWT-EventQueue-0","com.up.student.DAO.<init>(java.lang.String, int)","false",1417550
+"AWT-EventQueue-0","java.lang.Enum.<init>(java.lang.String, int)","false",1417558
+"AWT-EventQueue-0","java.lang.Enum.<init>(java.lang.String, int)","true",1417569
+"AWT-EventQueue-0","com.up.student.DAO.<init>(java.lang.String, int)","true",1417573
+"AWT-EventQueue-0","com.up.student.DAO.<init>(java.lang.String, int)","false",1417578
+"AWT-EventQueue-0","java.lang.Enum.<init>(java.lang.String, int)","false",1417579
+"AWT-EventQueue-0","java.lang.Enum.<init>(java.lang.String, int)","true",1417580
+"AWT-EventQueue-0","com.up.student.DAO.<init>(java.lang.String, int)","true",1417581
+"AWT-EventQueue-0","com.up.student.DAO.<clinit>()","true",1417639
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.getAbilityDAO(com.up.student.DAO)","false",1424924
+"AWT-EventQueue-0","com.up.student.base.BaseDAO$1.<clinit>()","false",1426055
+"AWT-EventQueue-0","com.up.student.DAO.values()","false",1426060
+"AWT-EventQueue-0","com.up.student.DAO.values()","true",1426073
+"AWT-EventQueue-0","com.up.student.base.BaseDAO$1.<clinit>()","true",1426086
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.<clinit>()","false",1426195
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.<clinit>()","true",1426200
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.getInstance()","false",1426204
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.<init>()","false",1426207
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.<init>()","false",1426211
+"AWT-EventQueue-0","com.up.student.util.DBUtil.getDBUtil()","false",1428503
+"AWT-EventQueue-0","com.up.student.util.DBUtil.<init>()","false",1428508
+"AWT-EventQueue-0","com.up.student.util.DBUtil.<init>()","true",1428515
+"AWT-EventQueue-0","com.up.student.util.DBUtil.getDBUtil()","true",1428516
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.init()","false",1428519
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.init()","true",1428521
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.<init>()","true",1428521
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.<init>()","true",1428522
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.getInstance()","true",1428523
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.getAbilityDAO(com.up.student.DAO)","true",1428523
+"AWT-EventQueue-0","javax.swing.JTextField.getText()","false",1428526
+"AWT-EventQueue-0","javax.swing.JTextField.getText()","true",1428553
+"AWT-EventQueue-0","javax.swing.JPasswordField.getPassword()","false",1428554
+"AWT-EventQueue-0","javax.swing.JPasswordField.getPassword()","true",1428577
+"AWT-EventQueue-0","java.lang.String.valueOf(char[ ])","false",1428578
+"AWT-EventQueue-0","java.lang.String.valueOf(char[ ])","true",1428584
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.queryForLogin(java.lang.String, java.lang.String)","false",1428588
+"AWT-EventQueue-0","java.lang.String.length()","false",1428590
+"AWT-EventQueue-0","java.lang.String.length()","true",1428593
+"AWT-EventQueue-0","java.lang.String.length()","false",1428594
+"AWT-EventQueue-0","java.lang.String.length()","true",1428595
+"AWT-EventQueue-0","com.up.student.util.DBUtil.executeQuery(java.lang.String, java.lang.Object[ ])","false",1428605
+"AWT-EventQueue-0","com.up.student.util.DBUtil.getConn()","false",1428607
+"AWT-EventQueue-0","java.lang.Class.forName(java.lang.String)","false",1428610
+"AWT-EventQueue-0","java.lang.Class.forName(java.lang.String)","true",1447782
+"AWT-EventQueue-0","java.sql.DriverManager.getConnection(java.lang.String, java.lang.String, java.lang.String)","false",1447788
+"AWT-EventQueue-0","java.sql.DriverManager.getConnection(java.lang.String, java.lang.String, java.lang.String)","true",1902007
+"AWT-EventQueue-0","com.up.student.util.DBUtil.getConn()","true",1902010
+"AWT-EventQueue-0","java.sql.Connection.prepareStatement(java.lang.String)","false",1902013
+"AWT-EventQueue-0","java.sql.Connection.prepareStatement(java.lang.String)","true",1921025
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","false",1921030
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","true",1923261
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","false",1923264
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","true",1923272
+"AWT-EventQueue-0","java.sql.PreparedStatement.executeQuery()","false",1923272
+"AWT-EventQueue-0","java.sql.PreparedStatement.executeQuery()","true",1923898
+"AWT-EventQueue-0","com.up.student.util.DBUtil.executeQuery(java.lang.String, java.lang.Object[ ])","true",1923901
+"AWT-EventQueue-0","java.sql.ResultSet.next()","false",1923904
+"AWT-EventQueue-0","java.sql.ResultSet.next()","true",1923918
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.destroy()","false",1923921
+"AWT-EventQueue-0","java.sql.ResultSet.close()","false",1923925
+"AWT-EventQueue-0","java.sql.ResultSet.close()","true",1923963
+"AWT-EventQueue-0","com.up.student.util.DBUtil.close()","false",1924048
+"AWT-EventQueue-0","java.sql.ResultSet.close()","false",1924053
+"AWT-EventQueue-0","java.sql.ResultSet.close()","true",1924063
+"AWT-EventQueue-0","java.sql.PreparedStatement.close()","false",1924065
+"AWT-EventQueue-0","java.sql.PreparedStatement.close()","true",1924099
+"AWT-EventQueue-0","java.sql.Connection.close()","false",1924101
+"AWT-EventQueue-0","java.sql.Connection.close()","true",1928231
+"AWT-EventQueue-0","com.up.student.util.DBUtil.close()","true",1928233
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.destroy()","true",1928234
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.queryForLogin(java.lang.String, java.lang.String)","true",1928235
+"AWT-EventQueue-0","javax.swing.JTextField.setText(java.lang.String)","false",1928239
+"AWT-EventQueue-0","javax.swing.JTextField.setText(java.lang.String)","true",1928520
+"AWT-EventQueue-0","javax.swing.JPasswordField.setText(java.lang.String)","false",1928522
+"AWT-EventQueue-0","javax.swing.JPasswordField.setText(java.lang.String)","true",1928883
+"AWT-EventQueue-0","com.up.student.view.LoginView.check()","true",1928885
+"AWT-EventQueue-0","com.up.student.view.LoginView.access$100(com.up.student.view.LoginView)","true",1928886
+"AWT-EventQueue-0","com.up.student.view.LoginView$1.actionPerformed(java.awt.event.ActionEvent)","true",1928891
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","false",4890060
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","false",4890068
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","true",4890071
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","true",4890074
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","false",4967800
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","false",4967806
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","true",4967808
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","true",4967810
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","false",5140735
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","false",5140739
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","true",5140740
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","true",5140742
+"AWT-EventQueue-0","com.up.student.view.LoginView$1.actionPerformed(java.awt.event.ActionEvent)","false",5613201
+"AWT-EventQueue-0","com.up.student.view.LoginView.access$100(com.up.student.view.LoginView)","false",5613205
+"AWT-EventQueue-0","com.up.student.view.LoginView.check()","false",5613206
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.getAbilityDAO(com.up.student.DAO)","false",5613208
+"AWT-EventQueue-0","java.lang.Object.getClass()","false",5613210
+"AWT-EventQueue-0","java.lang.Object.getClass()","true",5613219
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.getAbilityDAO(com.up.student.DAO)","true",5613221
+"AWT-EventQueue-0","javax.swing.JTextField.getText()","false",5613224
+"AWT-EventQueue-0","javax.swing.JTextField.getText()","true",5613230
+"AWT-EventQueue-0","javax.swing.JPasswordField.getPassword()","false",5613231
+"AWT-EventQueue-0","javax.swing.JPasswordField.getPassword()","true",5613236
+"AWT-EventQueue-0","java.lang.String.valueOf(char[ ])","false",5613236
+"AWT-EventQueue-0","java.lang.String.valueOf(char[ ])","true",5613242
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.queryForLogin(java.lang.String, java.lang.String)","false",5613244
+"AWT-EventQueue-0","java.lang.String.length()","false",5613244
+"AWT-EventQueue-0","java.lang.String.length()","true",5613245
+"AWT-EventQueue-0","java.lang.String.length()","false",5613246
+"AWT-EventQueue-0","java.lang.String.length()","true",5613246
+"AWT-EventQueue-0","com.up.student.util.DBUtil.executeQuery(java.lang.String, java.lang.Object[ ])","false",5613250
+"AWT-EventQueue-0","com.up.student.util.DBUtil.getConn()","false",5613251
+"AWT-EventQueue-0","java.sql.Connection.isClosed()","false",5613262
+"AWT-EventQueue-0","java.sql.Connection.isClosed()","true",5613278
+"AWT-EventQueue-0","java.lang.Class.forName(java.lang.String)","false",5613279
+"AWT-EventQueue-0","java.lang.Class.forName(java.lang.String)","true",5613290
+"AWT-EventQueue-0","java.sql.DriverManager.getConnection(java.lang.String, java.lang.String, java.lang.String)","false",5613291
+"AWT-EventQueue-0","java.sql.DriverManager.getConnection(java.lang.String, java.lang.String, java.lang.String)","true",5617750
+"AWT-EventQueue-0","com.up.student.util.DBUtil.getConn()","true",5617754
+"AWT-EventQueue-0","java.sql.Connection.prepareStatement(java.lang.String)","false",5617756
+"AWT-EventQueue-0","java.sql.Connection.prepareStatement(java.lang.String)","true",5617840
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","false",5617842
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","true",5617852
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","false",5617852
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","true",5617857
+"AWT-EventQueue-0","java.sql.PreparedStatement.executeQuery()","false",5617858
+"AWT-EventQueue-0","java.sql.PreparedStatement.executeQuery()","true",5618319
+"AWT-EventQueue-0","com.up.student.util.DBUtil.executeQuery(java.lang.String, java.lang.Object[ ])","true",5618321
+"AWT-EventQueue-0","java.sql.ResultSet.next()","false",5618323
+"AWT-EventQueue-0","java.sql.ResultSet.next()","true",5618326
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.destroy()","false",5618327
+"AWT-EventQueue-0","java.sql.ResultSet.close()","false",5618328
+"AWT-EventQueue-0","java.sql.ResultSet.close()","true",5618360
+"AWT-EventQueue-0","com.up.student.util.DBUtil.close()","false",5618361
+"AWT-EventQueue-0","java.sql.ResultSet.close()","false",5618362
+"AWT-EventQueue-0","java.sql.ResultSet.close()","true",5618363
+"AWT-EventQueue-0","java.sql.PreparedStatement.close()","false",5618364
+"AWT-EventQueue-0","java.sql.PreparedStatement.close()","true",5618373
+"AWT-EventQueue-0","java.sql.Connection.close()","false",5618373
+"AWT-EventQueue-0","java.sql.Connection.close()","true",5618453
+"AWT-EventQueue-0","com.up.student.util.DBUtil.close()","true",5618455
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.destroy()","true",5618455
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.queryForLogin(java.lang.String, java.lang.String)","true",5618456
+"AWT-EventQueue-0","javax.swing.JTextField.setText(java.lang.String)","false",5618457
+"AWT-EventQueue-0","javax.swing.JTextField.setText(java.lang.String)","true",5618817
+"AWT-EventQueue-0","javax.swing.JPasswordField.setText(java.lang.String)","false",5618819
+"AWT-EventQueue-0","javax.swing.JPasswordField.setText(java.lang.String)","true",5619043
+"AWT-EventQueue-0","com.up.student.view.LoginView.check()","true",5619045
+"AWT-EventQueue-0","com.up.student.view.LoginView.access$100(com.up.student.view.LoginView)","true",5619046
+"AWT-EventQueue-0","com.up.student.view.LoginView$1.actionPerformed(java.awt.event.ActionEvent)","true",5619046
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","false",7194987
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","false",7195009
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","true",7195013
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","true",7195016
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","false",7333506
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","false",7333511
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","true",7333512
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","true",7333514
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","false",7529785
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","false",7529789
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","true",7529790
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","true",7529791
+"AWT-EventQueue-0","com.up.student.view.LoginView$1.actionPerformed(java.awt.event.ActionEvent)","false",7862468
+"AWT-EventQueue-0","com.up.student.view.LoginView.access$100(com.up.student.view.LoginView)","false",7862474
+"AWT-EventQueue-0","com.up.student.view.LoginView.check()","false",7862476
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.getAbilityDAO(com.up.student.DAO)","false",7862479
+"AWT-EventQueue-0","java.lang.Object.getClass()","false",7862483
+"AWT-EventQueue-0","java.lang.Object.getClass()","true",7862486
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.getAbilityDAO(com.up.student.DAO)","true",7862488
+"AWT-EventQueue-0","javax.swing.JTextField.getText()","false",7862490
+"AWT-EventQueue-0","javax.swing.JTextField.getText()","true",7862502
+"AWT-EventQueue-0","javax.swing.JPasswordField.getPassword()","false",7862503
+"AWT-EventQueue-0","javax.swing.JPasswordField.getPassword()","true",7862517
+"AWT-EventQueue-0","java.lang.String.valueOf(char[ ])","false",7862518
+"AWT-EventQueue-0","java.lang.String.valueOf(char[ ])","true",7862522
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.queryForLogin(java.lang.String, java.lang.String)","false",7862524
+"AWT-EventQueue-0","java.lang.String.length()","false",7862525
+"AWT-EventQueue-0","java.lang.String.length()","true",7862527
+"AWT-EventQueue-0","java.lang.String.length()","false",7862528
+"AWT-EventQueue-0","java.lang.String.length()","true",7862528
+"AWT-EventQueue-0","com.up.student.util.DBUtil.executeQuery(java.lang.String, java.lang.Object[ ])","false",7862534
+"AWT-EventQueue-0","com.up.student.util.DBUtil.getConn()","false",7862535
+"AWT-EventQueue-0","java.sql.Connection.isClosed()","false",7862537
+"AWT-EventQueue-0","java.sql.Connection.isClosed()","true",7862539
+"AWT-EventQueue-0","java.lang.Class.forName(java.lang.String)","false",7862541
+"AWT-EventQueue-0","java.lang.Class.forName(java.lang.String)","true",7862559
+"AWT-EventQueue-0","java.sql.DriverManager.getConnection(java.lang.String, java.lang.String, java.lang.String)","false",7862561
+"AWT-EventQueue-0","java.sql.DriverManager.getConnection(java.lang.String, java.lang.String, java.lang.String)","true",7873344
+"AWT-EventQueue-0","com.up.student.util.DBUtil.getConn()","true",7873350
+"AWT-EventQueue-0","java.sql.Connection.prepareStatement(java.lang.String)","false",7873354
+"AWT-EventQueue-0","java.sql.Connection.prepareStatement(java.lang.String)","true",7873503
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","false",7873507
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","true",7873528
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","false",7873530
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","true",7873542
+"AWT-EventQueue-0","java.sql.PreparedStatement.executeQuery()","false",7873544
+"AWT-EventQueue-0","java.sql.PreparedStatement.executeQuery()","true",7874589
+"AWT-EventQueue-0","com.up.student.util.DBUtil.executeQuery(java.lang.String, java.lang.Object[ ])","true",7874594
+"AWT-EventQueue-0","java.sql.ResultSet.next()","false",7874597
+"AWT-EventQueue-0","java.sql.ResultSet.next()","true",7874604
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.destroy()","false",7874607
+"AWT-EventQueue-0","java.sql.ResultSet.close()","false",7874609
+"AWT-EventQueue-0","java.sql.ResultSet.close()","true",7874678
+"AWT-EventQueue-0","com.up.student.util.DBUtil.close()","false",7874681
+"AWT-EventQueue-0","java.sql.ResultSet.close()","false",7874682
+"AWT-EventQueue-0","java.sql.ResultSet.close()","true",7874684
+"AWT-EventQueue-0","java.sql.PreparedStatement.close()","false",7874685
+"AWT-EventQueue-0","java.sql.PreparedStatement.close()","true",7874711
+"AWT-EventQueue-0","java.sql.Connection.close()","false",7874713
+"AWT-EventQueue-0","java.sql.Connection.close()","true",7874896
+"AWT-EventQueue-0","com.up.student.util.DBUtil.close()","true",7874899
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.destroy()","true",7874900
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.queryForLogin(java.lang.String, java.lang.String)","true",7874901
+"AWT-EventQueue-0","javax.swing.JTextField.setText(java.lang.String)","false",7874917
+"AWT-EventQueue-0","javax.swing.JTextField.setText(java.lang.String)","true",7875420
+"AWT-EventQueue-0","javax.swing.JPasswordField.setText(java.lang.String)","false",7875425
+"AWT-EventQueue-0","javax.swing.JPasswordField.setText(java.lang.String)","true",7875776
+"AWT-EventQueue-0","com.up.student.view.LoginView.check()","true",7875779
+"AWT-EventQueue-0","com.up.student.view.LoginView.access$100(com.up.student.view.LoginView)","true",7875780
+"AWT-EventQueue-0","com.up.student.view.LoginView$1.actionPerformed(java.awt.event.ActionEvent)","true",7875781
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","false",9119978
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","false",9119985
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","true",9119988
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","true",9119991
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","false",9373872
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","false",9373881
+"AWT-EventQueue-0","java.awt.event.KeyEvent.getKeyCode()","true",9373883
+"AWT-EventQueue-0","com.up.student.view.LoginView$LoginListener.keyPressed(java.awt.event.KeyEvent)","true",9373884
+"AWT-EventQueue-0","com.up.student.view.LoginView$1.actionPerformed(java.awt.event.ActionEvent)","false",9720238
+"AWT-EventQueue-0","com.up.student.view.LoginView.access$100(com.up.student.view.LoginView)","false",9720244
+"AWT-EventQueue-0","com.up.student.view.LoginView.check()","false",9720246
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.getAbilityDAO(com.up.student.DAO)","false",9720249
+"AWT-EventQueue-0","java.lang.Object.getClass()","false",9720253
+"AWT-EventQueue-0","java.lang.Object.getClass()","true",9720289
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.getAbilityDAO(com.up.student.DAO)","true",9720292
+"AWT-EventQueue-0","javax.swing.JTextField.getText()","false",9720294
+"AWT-EventQueue-0","javax.swing.JTextField.getText()","true",9720306
+"AWT-EventQueue-0","javax.swing.JPasswordField.getPassword()","false",9720307
+"AWT-EventQueue-0","javax.swing.JPasswordField.getPassword()","true",9720315
+"AWT-EventQueue-0","java.lang.String.valueOf(char[ ])","false",9720316
+"AWT-EventQueue-0","java.lang.String.valueOf(char[ ])","true",9720320
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.queryForLogin(java.lang.String, java.lang.String)","false",9720328
+"AWT-EventQueue-0","java.lang.String.length()","false",9720330
+"AWT-EventQueue-0","java.lang.String.length()","true",9720331
+"AWT-EventQueue-0","java.lang.String.length()","false",9720332
+"AWT-EventQueue-0","java.lang.String.length()","true",9720333
+"AWT-EventQueue-0","com.up.student.util.DBUtil.executeQuery(java.lang.String, java.lang.Object[ ])","false",9720339
+"AWT-EventQueue-0","com.up.student.util.DBUtil.getConn()","false",9720340
+"AWT-EventQueue-0","java.sql.Connection.isClosed()","false",9720342
+"AWT-EventQueue-0","java.sql.Connection.isClosed()","true",9720345
+"AWT-EventQueue-0","java.lang.Class.forName(java.lang.String)","false",9720346
+"AWT-EventQueue-0","java.lang.Class.forName(java.lang.String)","true",9720367
+"AWT-EventQueue-0","java.sql.DriverManager.getConnection(java.lang.String, java.lang.String, java.lang.String)","false",9720368
+"AWT-EventQueue-0","java.sql.DriverManager.getConnection(java.lang.String, java.lang.String, java.lang.String)","true",9728507
+"AWT-EventQueue-0","com.up.student.util.DBUtil.getConn()","true",9728514
+"AWT-EventQueue-0","java.sql.Connection.prepareStatement(java.lang.String)","false",9728517
+"AWT-EventQueue-0","java.sql.Connection.prepareStatement(java.lang.String)","true",9728677
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","false",9728681
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","true",9728709
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","false",9728710
+"AWT-EventQueue-0","java.sql.PreparedStatement.setObject(int, java.lang.Object)","true",9728723
+"AWT-EventQueue-0","java.sql.PreparedStatement.executeQuery()","false",9728724
+"AWT-EventQueue-0","java.sql.PreparedStatement.executeQuery()","true",9729597
+"AWT-EventQueue-0","com.up.student.util.DBUtil.executeQuery(java.lang.String, java.lang.Object[ ])","true",9729602
+"AWT-EventQueue-0","java.sql.ResultSet.next()","false",9729605
+"AWT-EventQueue-0","java.sql.ResultSet.next()","true",9729611
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.destroy()","false",9729614
+"AWT-EventQueue-0","java.sql.ResultSet.close()","false",9729616
+"AWT-EventQueue-0","java.sql.ResultSet.close()","true",9729680
+"AWT-EventQueue-0","com.up.student.util.DBUtil.close()","false",9729683
+"AWT-EventQueue-0","java.sql.ResultSet.close()","false",9729684
+"AWT-EventQueue-0","java.sql.ResultSet.close()","true",9729686
+"AWT-EventQueue-0","java.sql.PreparedStatement.close()","false",9729687
+"AWT-EventQueue-0","java.sql.PreparedStatement.close()","true",9729706
+"AWT-EventQueue-0","java.sql.Connection.close()","false",9729707
+"AWT-EventQueue-0","java.sql.Connection.close()","true",9729948
+"AWT-EventQueue-0","com.up.student.util.DBUtil.close()","true",9729953
+"AWT-EventQueue-0","com.up.student.base.BaseDAO.destroy()","true",9729955
+"AWT-EventQueue-0","com.up.student.dao.AdminDAO.queryForLogin(java.lang.String, java.lang.String)","true",9729956
+"AWT-EventQueue-0","javax.swing.JTextField.setText(java.lang.String)","false",9729960
+"AWT-EventQueue-0","javax.swing.JTextField.setText(java.lang.String)","true",9730849
+"AWT-EventQueue-0","javax.swing.JPasswordField.setText(java.lang.String)","false",9730860
+"AWT-EventQueue-0","javax.swing.JPasswordField.setText(java.lang.String)","true",9731577
+"AWT-EventQueue-0","com.up.student.view.LoginView.check()","true",9731583
+"AWT-EventQueue-0","com.up.student.view.LoginView.access$100(com.up.student.view.LoginView)","true",9731585
+"AWT-EventQueue-0","com.up.student.view.LoginView$1.actionPerformed(java.awt.event.ActionEvent)","true",9731587
