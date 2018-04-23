@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.IDao.paraInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.paraInfo">
+    <id column="para_id" jdbcType="BIGINT" property="paraId" />
+    <result column="func_id" jdbcType="BIGINT" property="funcId" />
+    <result column="para_type" jdbcType="VARCHAR" property="paraType" />
+    <result column="ori_type" jdbcType="INTEGER" property="oriType" />
+    <result column="input_content" jdbcType="VARCHAR" property="inputContent" />
+    <result column="func_result" jdbcType="INTEGER" property="funcResult" />
+    <result column="input_para" jdbcType="INTEGER" property="inputPara" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    para_id, func_id, para_type, ori_type, input_content, func_result, input_para
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from paraInfo
+    where para_id = #{paraId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByfuncid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    *
+    from paraInfo
+    where func_id = #{funcId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from paraInfo
+    where para_id = #{paraId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.paraInfo">
+    insert into paraInfo (para_id, func_id, para_type, 
+      ori_type, input_content, func_result, 
+      input_para)
+    values (#{paraId,jdbcType=BIGINT}, #{funcId,jdbcType=BIGINT}, #{paraType,jdbcType=VARCHAR}, 
+      #{oriType,jdbcType=INTEGER}, #{inputContent,jdbcType=VARCHAR}, #{funcResult,jdbcType=INTEGER}, 
+      #{inputPara,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.paraInfo">
+    insert into paraInfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="paraId != null">
+        para_id,
+      </if>
+      <if test="funcId != null">
+        func_id,
+      </if>
+      <if test="paraType != null">
+        para_type,
+      </if>
+      <if test="oriType != null">
+        ori_type,
+      </if>
+      <if test="inputContent != null">
+        input_content,
+      </if>
+      <if test="funcResult != null">
+        func_result,
+      </if>
+      <if test="inputPara != null">
+        input_para,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="paraId != null">
+        #{paraId,jdbcType=BIGINT},
+      </if>
+      <if test="funcId != null">
+        #{funcId,jdbcType=BIGINT},
+      </if>
+      <if test="paraType != null">
+        #{paraType,jdbcType=VARCHAR},
+      </if>
+      <if test="oriType != null">
+        #{oriType,jdbcType=INTEGER},
+      </if>
+      <if test="inputContent != null">
+        #{inputContent,jdbcType=VARCHAR},
+      </if>
+      <if test="funcResult != null">
+        #{funcResult,jdbcType=INTEGER},
+      </if>
+      <if test="inputPara != null">
+        #{inputPara,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.paraInfo">
+    update paraInfo
+    <set>
+      <if test="funcId != null">
+        func_id = #{funcId,jdbcType=BIGINT},
+      </if>
+      <if test="paraType != null">
+        para_type = #{paraType,jdbcType=VARCHAR},
+      </if>
+      <if test="oriType != null">
+        ori_type = #{oriType,jdbcType=INTEGER},
+      </if>
+      <if test="inputContent != null">
+        input_content = #{inputContent,jdbcType=VARCHAR},
+      </if>
+      <if test="funcResult != null">
+        func_result = #{funcResult,jdbcType=INTEGER},
+      </if>
+      <if test="inputPara != null">
+        input_para = #{inputPara,jdbcType=INTEGER},
+      </if>
+    </set>
+    where para_id = #{paraId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.paraInfo">
+    update paraInfo
+    set func_id = #{funcId,jdbcType=BIGINT},
+      para_type = #{paraType,jdbcType=VARCHAR},
+      ori_type = #{oriType,jdbcType=INTEGER},
+      input_content = #{inputContent,jdbcType=VARCHAR},
+      func_result = #{funcResult,jdbcType=INTEGER},
+      input_para = #{inputPara,jdbcType=INTEGER}
+    where para_id = #{paraId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,3 @@
+array: [全部, 全部] selectByCondition
+10,selectByCondition
+java.lang.String id:abc,java.lang.String name:bcd,double price:12.0,java.lang.String origin:aa,double stock:12.01,java.lang.String warehouseId:123,java.lang.String categoryId:as,int delFlag:1,,selectByCondition

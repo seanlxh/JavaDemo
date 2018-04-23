@@ -1,0 +1,16 @@
+#body{
+	padding:10px 20px;
+}
+#right-box{
+	height:510px;
+	width: 100%;
+	border:1px solid #ddd;
+	border-radius:0;
+	resize: none;
+	overflow-y:scroll; 
+	outline:none;
+	position:relative;
+}
+#line-num{
+	
+}

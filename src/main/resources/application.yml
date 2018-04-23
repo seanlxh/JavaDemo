@@ -1,0 +1,10 @@
+spring:
+  mybatis:
+    typeAliasesPackage: com.example.demo.entity
+    mapperLocations: classpath:**/*.xml
+  datasource:
+    url: jdbc:mysql://localhost:3306/APIPlatform
+    username: root
+    password: lxh960119
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource

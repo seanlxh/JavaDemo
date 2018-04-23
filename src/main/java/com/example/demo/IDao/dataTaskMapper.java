@@ -1,0 +1,22 @@
+package com.example.demo.IDao;
+
+import com.example.demo.entity.dataSource;
+import com.example.demo.entity.dataTask;
+
+import java.util.List;
+
+public interface dataTaskMapper {
+    int deleteByPrimaryKey(Long taskId);
+
+    int insert(dataTask record);
+
+    int insertSelective(dataTask record);
+
+    dataTask selectByPrimaryKey(Long taskId);
+
+    int updateByPrimaryKeySelective(dataTask record);
+
+    int updateByPrimaryKey(dataTask record);
+
+    List<dataTask> getAll();
+}

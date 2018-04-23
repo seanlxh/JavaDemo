@@ -1,0 +1,528 @@
+/**左侧部分**/
+/**左侧-筛选条件**/
+.filter-toggle-btn {
+    position:absolute;
+    right:15px;
+    bottom:10px;
+    cursor:pointer;
+    font-size:12px;
+    color:#2F6589;
+}
+.filter-toggle-btn i {
+    margin-left:3px;
+}
+.filter-toggle-btn:hover {
+    color:#008dd5;
+}
+.filter-toggle-btn-down {
+    border-bottom:0;
+    border-top:8px solid #2F65A6;
+    bottom:-8px;
+}
+.container .cata-filter {
+    position:relative;
+    padding:5px;
+    background-color:#fff;
+    border: 1px solid #ececec;
+    border-bottom-color:#ddd;
+    border-radius:3px;
+    -webkit-box-shadow:0 3px 3px rgba(0,0,0,0.05);
+    box-shadow:0 3px 3px rgba(0,0,0,0.05);
+}
+.container .cata-filter .filter-selected {
+    display:none;
+    border-bottom:1px solid #ddd;
+    margin:0 10px;
+    padding:5px 0;
+    margin-bottom:5px;
+    overflow:hidden;
+    line-height:20px;
+}
+.container .cata-filter .filter-selected .selected-title {
+    float:left;
+    width:45px;
+    font-size:12px;
+    font-family:'Microsoft Yahei';
+    color:#333;
+}
+.container .cata-filter .filter-selected .selected-empty {
+    float:right;
+    font-size:12px;
+    font-family:'Microsoft Yahei';
+    color:#333;
+    cursor:pointer;
+}
+.container .cata-filter .filter-selected .selected-empty:hover {
+    color:#2f6589;
+}
+.container .cata-filter .filter-selected ul {
+    overflow:hidden;
+    margin-left:45px;
+    margin-right:80px;
+}
+.container .cata-filter .filter-selected li {
+    display:none;
+    float:left;
+    padding:0 5px;
+    font-size:12px;
+    background:#dfeffc;
+    border:1px solid #a6c9e2;
+    color:#2E6E9E;
+    margin:0 5px 5px 0;
+}
+.container .cata-filter .filter-selected li i {
+    font-size:14px;
+    cursor:pointer;
+}
+.container .cata-filter .filter-main {
+    line-height:30px;
+    overflow:hidden;
+    padding:0 10px;
+}
+.container .cata-filter .filter-main .filter-header {
+    float:left;
+    width:45px;
+    font-size:12px;
+    font-family:'Microsoft Yahei';
+    color:#333;
+}
+.container .cata-filter .filter-main .filter-header i {
+    margin-right:2px;
+    font-size:12px;
+    color:#666;
+}
+.container .cata-filter .filter-main .filter-body {
+    margin-left:45px;
+    font-size:12px;
+}
+.container .cata-filter .filter-main .filter-body .filter-list li {
+    display:inline-block;
+    line-height:20px;
+    padding:5px 7px;
+    color:#999;
+    cursor:pointer;
+    min-width:25px;
+}
+.container .cata-filter .filter-main .filter-body .filter-list li:hover {
+    color:#2f6589;
+}
+.container .cata-filter .filter-main .filter-body .active {
+    color:#2f6589!important;
+    font-weight:bold;
+}
+.container .cata-filter .filter-main .filter-body .filter-theme-part {
+    display:none;
+    position:relative;
+    background:#EBF6FF;
+    padding:10px;
+    color:#777;
+    line-height:25px;
+    margin-top:3px;
+    margin-bottom:10px;
+}
+.container .cata-filter .filter-main .filter-body .filter-theme-part .theme-first-list li {
+    display:inline-block;
+    width:150px;
+    cursor:pointer;
+}
+.container .cata-filter .filter-main .filter-body .filter-theme-part i {
+    margin-right:3px;
+    color:#777;
+    vertical-align:-1px;
+}
+.container .cata-filter .filter-main .filter-body .filter-theme-part .theme-first-list li:hover {
+    color:#2f6589;
+}
+.container .cata-filter .filter-main .filter-body .filter-theme-part .theme-first-list li:hover i {
+    color:#2f6589;
+    font-weight:normal;
+}
+.container .cata-filter .filter-main .filter-body .filter-theme-arrow {
+    position:absolute;
+    top:-6px;
+    left:52px;
+    width:0;
+    height:0;
+    border-left:10px solid transparent;
+    border-right:10px solid transparent;
+    border-bottom:6px solid #EBF6FF;
+}
+.container .cata-filter .filter-main .filter-body .filter-theme-part .theme-second-list {
+    display:none;
+}
+.container .cata-filter .filter-main .filter-body .filter-theme-part .theme-second-list .second-title {
+    color:#2f6589;
+    font-family:'Microsoft Yahei';
+    font-size:14px;
+}
+.container .cata-filter .filter-main .filter-body .filter-theme-part .theme-second-list .second-title i {
+    cursor:pointer;
+    color:#2f6589;
+    margin:0 0 0 5px;
+    vertical-align:0;
+}
+.container .cata-filter .filter-main .filter-body .filter-theme-part .theme-second-list li {
+    display:inline-block;
+    cursor:pointer;
+    padding-right:10px;
+}
+.container .cata-filter .filter-main .filter-body .filter-theme-part .theme-second-list li:hover {
+    color:#2f6589;
+}
+.container .cata-filter .filter-main .filter-body .filter-depart-part {
+    display:none;
+    position:relative;
+    background:#EBF6FF;
+    padding:10px;
+    color:#777;
+    line-height:25px;
+    margin-top:3px;
+    margin-bottom:10px;
+}
+.container .cata-filter .filter-main .filter-body .filter-depart-arrow {
+    position:absolute;
+    top:-6px;
+    left:92px;
+    width:0;
+    height:0;
+    border-left:10px solid transparent;
+    border-right:10px solid transparent;
+    border-bottom:6px solid #EBF6FF;
+}
+.container .cata-filter .filter-main .filter-body .depart-list .depart-first {
+    float:left;
+    width:30px;
+    font-family:'Microsoft Yahei';
+    color:#333;
+}
+.container .cata-filter .filter-main .filter-body .depart-list .depart-main {
+    margin-left:30px;
+    margin-bottom:5px;
+}
+.container .cata-filter .filter-main .filter-body .depart-list li {
+    display:inline-block;
+    cursor:pointer;
+    width:70px;
+    overflow: hidden;
+    height: 20px;
+}
+.container .cata-filter .filter-main .filter-body .depart-list li:hover {
+    color:#2f6589;
+}
+/**左侧-排序条**/
+.container .cata-sort {
+    padding:0 5px;
+    margin:15px 0 10px;
+    background-color:#fff;
+    border: 1px solid #ececec;
+    border-bottom-color:#ddd;
+    border-radius:3px;
+    line-height:40px;
+    color:#333;
+    font-size:12px;
+    overflow:hidden;
+    -webkit-box-shadow:0 3px 3px rgba(0,0,0,0.05);
+    box-shadow:0 3px 3px rgba(0,0,0,0.05);
+}
+.container .cata-sort .sort-sum {
+    float:left;
+    padding:0 10px;
+    margin-right:10px;
+    font-family:'Microsoft Yahei';
+}
+.container .cata-sort .sort-list {
+    float:left;
+}
+.container .cata-sort .sort-list ul li {
+    display:inline-block;
+    padding:0 10px;
+    cursor:pointer;
+    color:#999;
+}
+.container .cata-sort .sort-list ul li i {
+    font-size:12px;
+    color:#999;
+}
+.container .cata-sort .sort-list ul li:hover {
+    color:#2f6589;
+}
+.container .cata-sort .sort-list ul li:hover i {
+    color:#2578c4;
+}
+.container .cata-sort .sort-list .active {
+    color:#2f6589;
+    font-weight:bold;
+}
+.container .cata-sort .sort-list .active i {
+    color:#2578c4
+}
+.container .cata-sort .sort-itemstyle {
+    float:right;
+    padding-top:2px;
+    overflow:hidden;
+}
+.container .cata-sort .sort-itemstyle div {
+    float:left;
+    padding:0 10px;
+    cursor:pointer;
+}
+.container .cata-sort .sort-itemstyle div i {
+    color:#999;
+}
+.container .cata-sort .sort-itemstyle div:hover i {
+    color:#2578c4;
+}
+.container .cata-sort .sort-itemstyle .active i {
+    color:#2578c4;
+}
+.container .cata-sort .sort-demand {
+    float:right;
+    height:42px;
+    position:relative;
+    margin-left:20px;
+    margin-right:10px;
+    font-size:12px;
+    cursor:pointer;
+}
+.container .cata-sort .sort-demand .m-input {
+    height:28px;
+    padding-right:30px;
+    font-size:12px;
+    border-radius:200px;
+}
+.container .cata-sort .sort-demand .m-input:focus {
+    background-color:#fefefe;
+    border-color:#2578c4;
+}
+.container .cata-sort .sort-demand .m-input:focus ~ .iconfont {
+    color:#2578c4;
+}
+.container .cata-sort .sort-demand .iconfont {
+    position:absolute;
+    right:10px;
+    top:8px;
+    height:30px;
+    line-height:30px;
+    color:#999;
+}
+.container .cata-sort .sort-demand .iconfont:hover {
+    color:#2f6589;
+}
+/**左侧-目录列表**/
+.container .cata-main .cata-list .cata-item {
+    border: 1px solid #ececec;
+    border-bottom-color: #ddd;
+    background:#fff;
+    background:#fff\9;
+    padding:1em;
+    overflow:hidden;
+    border-radius:.25em;
+    -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.1);
+    box-shadow:0 1px 2px rgba(0,0,0,0.1);
+    margin-bottom:10px;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    -webkit-transition:background-color .25s ease-out;
+    transition:background-color .25s ease-out;
+}
+.container .cata-main .cata-list .cata-item:hover {
+    background-color:#fff;
+}
+.container .cata-main .cata-list .cata-item:hover .item-icon {
+    opacity:1;
+}
+.container .cata-main .cata-list .cata-item:hover .item-format {
+    opacity:1!important;
+}
+.container .cata-main .cata-list .cata-item .item-icon {
+    width:60px;
+    height:60px;
+    float:left;
+    opacity:.5;
+    -webkit-transition:all .25s ease-in;
+    transition:all .25s ease-in;
+}
+.container .cata-main .cata-list .cata-item .item-icon i {
+    font-size:3em;
+    color:#2F65A6;
+}
+.container .cata-main .cata-list .cata-item .item-content {
+    margin-left:60px;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-header {
+    border-bottom:1px solid #dadada;
+    margin-bottom:.5em;
+    line-height:1.5;
+    font-family:'Microsoft Yahei';
+}
+.container .cata-main .cata-list .cata-item .item-content .item-header .item-title{
+    margin-right: 320px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-header .item-title span{
+    color: #666;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-header .item-title a {
+    color:#2f6589;
+    font-size:16px;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-header .item-operation {
+    float:right;
+    width: 320px;
+    margin-top:2px;
+    font-size:12px;
+    text-align: right;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-header .item-operation ul li {
+    display:inline-block;
+    margin-left:20px;
+    color:#2f6589;
+    cursor:pointer;
+    opacity:.8;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-header .item-operation ul li:hover {
+    opacity:1;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-header .item-operation ul li i {
+    margin-right:3px;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-body .item-format {
+    float:right;
+    opacity:.5;
+    margin-top:45px;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    -webkit-transition:background-color .25s ease-out;
+    transition:background-color .25s ease-out;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-body .item-info {
+    font-size:12px;
+    color:#666;
+    line-height:23px;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-body .item-info div {
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-body .item-info .item-theme {
+    color:#2f6589;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-body .item-info .item-text span{
+    margin-right: 10px;
+}
+.container .cata-main .cata-list .cata-item .item-content .item-body .item-info div.item-news{
+    margin-right: 150px;
+    white-space: normal;
+}
+/**左侧-卡片列表**/
+.container .cata-main .cata-card {
+    margin-right:-1%;
+    display:none;
+}
+.container .cata-main .cata-card ul {
+    overflow:hidden;
+}
+.container .cata-main .cata-card ul .card-item {
+    float:left;
+    width:32.33%;
+    height:267px;
+    margin-right:1%;
+    background:rgba(255,255,255,0.7);
+    background:#F4FAFD\9;
+    padding:1em;
+    overflow:hidden;
+    border-radius:.25em;
+    -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.1);
+    box-shadow:0 1px 2px rgba(0,0,0,0.1);
+    margin-bottom:10px;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    -webkit-transition:background-color .25s ease-out;
+    transition:background-color .25s ease-out;
+}
+.container .cata-main .cata-card ul .card-item:hover {
+    background-color:#fff;
+}
+.container .cata-main .cata-card ul .card-item:hover .card-format {
+    opacity:1!important;
+}
+.container .cata-main .cata-card ul .card-item .card-header {
+    min-height:60px;
+}
+.container .cata-main .cata-card ul .card-item .card-header .card-icon {
+    float:left;
+    width:60px;
+    height:60px;
+    opacity:.5;
+    -webkit-transition:all .25s ease-in;
+    transition:all .25s ease-in;
+}
+.container .cata-main .cata-card ul .card-item .card-header .card-icon i {
+    font-size:3em;
+    color:#2F65A6;
+}
+.container .cata-main .cata-card ul .card-item:hover .card-icon {
+    opacity:1;
+}
+.container .cata-main .cata-card ul .card-item .card-header .card-right {
+    margin-left:60px;
+}
+.container .cata-main .cata-card ul .card-item .card-header .card-right .card-title {
+    max-height:42px;
+    overflow:hidden;
+}
+.container .cata-main .cata-card ul .card-item .card-header .card-right .card-title a {
+    color:#2f6589;
+    font-size:14px;
+    font-family:"Microsoft Yahei";
+}
+.container .cata-main .cata-card ul .card-item .card-body {
+    font-size:12px;
+    line-height:23px;
+}
+.container .cata-main .cata-card ul .card-item .card-body .card-format {
+    height:23px;
+    opacity:.5;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    -webkit-transition:background-color .25s ease-out;
+    transition:background-color .25s ease-out;
+}
+.container .cata-main .cata-card ul .card-item .card-body .card-theme {
+    color:#2f6589;
+}
+.container .cata-main .cata-card ul .card-item .card-body .card-info {
+    color:#666;
+}
+.container .cata-main .cata-card ul .card-item .card-body .card-info div {
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.container .cata-main .cata-card ul .card-item .card-footer {
+    font-size:12px;
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px solid #ddd;
+}
+.container .cata-main .cata-card ul .card-item .card-footer ul li {
+    float: right;
+    width:20%;
+    text-align:center;
+    color:#2f6589;
+    cursor:pointer;
+    opacity:.8;
+}
+.container .cata-main .cata-card ul .card-item .card-footer ul li:hover {
+    opacity:1;
+}
+.container .cata-main .cata-card ul .card-item .card-footer ul li i {
+    margin-right:3px;
+}

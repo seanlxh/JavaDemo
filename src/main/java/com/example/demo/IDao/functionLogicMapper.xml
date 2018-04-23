@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.IDao.functionLogicMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.functionLogic" >
+    <id column="function_id" property="functionId" jdbcType="BIGINT" />
+    <result column="ds_id" property="dsId" jdbcType="BIGINT" />
+    <result column="className" property="classname" jdbcType="VARCHAR" />
+    <result column="methodName" property="methodname" jdbcType="VARCHAR" />
+    <result column="paraNum" property="paranum" jdbcType="INTEGER" />
+    <result column="executeSequence" property="executesequence" jdbcType="INTEGER" />
+    <result column="resultType" property="resulttype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    function_id, ds_id, className, methodName, paraNum, executeSequence, resultType
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from functionLogic
+    where function_id = #{functionId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByDSIDWithLogic" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    *
+    from functionLogic
+    where ds_id = #{dsId,jdbcType=BIGINT}
+    ORDER BY executeSequence ASC
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from functionLogic
+    where function_id = #{functionId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.functionLogic" >
+    insert into functionLogic (function_id, ds_id, className, 
+      methodName, paraNum, executeSequence, 
+      resultType)
+    values (#{functionId,jdbcType=BIGINT}, #{dsId,jdbcType=BIGINT}, #{classname,jdbcType=VARCHAR}, 
+      #{methodname,jdbcType=VARCHAR}, #{paranum,jdbcType=INTEGER}, #{executesequence,jdbcType=INTEGER}, 
+      #{resulttype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.functionLogic" >
+    insert into functionLogic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="functionId != null" >
+        function_id,
+      </if>
+      <if test="dsId != null" >
+        ds_id,
+      </if>
+      <if test="classname != null" >
+        className,
+      </if>
+      <if test="methodname != null" >
+        methodName,
+      </if>
+      <if test="paranum != null" >
+        paraNum,
+      </if>
+      <if test="executesequence != null" >
+        executeSequence,
+      </if>
+      <if test="resulttype != null" >
+        resultType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="functionId != null" >
+        #{functionId,jdbcType=BIGINT},
+      </if>
+      <if test="dsId != null" >
+        #{dsId,jdbcType=BIGINT},
+      </if>
+      <if test="classname != null" >
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="methodname != null" >
+        #{methodname,jdbcType=VARCHAR},
+      </if>
+      <if test="paranum != null" >
+        #{paranum,jdbcType=INTEGER},
+      </if>
+      <if test="executesequence != null" >
+        #{executesequence,jdbcType=INTEGER},
+      </if>
+      <if test="resulttype != null" >
+        #{resulttype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.functionLogic" >
+    update functionLogic
+    <set >
+      <if test="dsId != null" >
+        ds_id = #{dsId,jdbcType=BIGINT},
+      </if>
+      <if test="classname != null" >
+        className = #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="methodname != null" >
+        methodName = #{methodname,jdbcType=VARCHAR},
+      </if>
+      <if test="paranum != null" >
+        paraNum = #{paranum,jdbcType=INTEGER},
+      </if>
+      <if test="executesequence != null" >
+        executeSequence = #{executesequence,jdbcType=INTEGER},
+      </if>
+      <if test="resulttype != null" >
+        resultType = #{resulttype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where function_id = #{functionId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.functionLogic" >
+    update functionLogic
+    set ds_id = #{dsId,jdbcType=BIGINT},
+      className = #{classname,jdbcType=VARCHAR},
+      methodName = #{methodname,jdbcType=VARCHAR},
+      paraNum = #{paranum,jdbcType=INTEGER},
+      executeSequence = #{executesequence,jdbcType=INTEGER},
+      resultType = #{resulttype,jdbcType=VARCHAR}
+    where function_id = #{functionId,jdbcType=BIGINT}
+  </update>
+</mapper>

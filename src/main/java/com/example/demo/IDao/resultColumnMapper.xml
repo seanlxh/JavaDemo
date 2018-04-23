@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.IDao.resultColumnMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.resultColumn">
+    <id column="result_id" jdbcType="BIGINT" property="resultId" />
+    <result column="columnNum" jdbcType="INTEGER" property="columnnum" />
+    <result column="columnName" jdbcType="VARCHAR" property="columnname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    result_id, columnNum, columnName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from resultColumn
+    where result_id = #{resultId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from resultColumn
+    where result_id = #{resultId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.resultColumn">
+    insert into resultColumn (result_id, columnNum, columnName
+      )
+    values (#{resultId,jdbcType=BIGINT}, #{columnnum,jdbcType=INTEGER}, #{columnname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.resultColumn">
+    insert into resultColumn
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resultId != null">
+        result_id,
+      </if>
+      <if test="columnnum != null">
+        columnNum,
+      </if>
+      <if test="columnname != null">
+        columnName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resultId != null">
+        #{resultId,jdbcType=BIGINT},
+      </if>
+      <if test="columnnum != null">
+        #{columnnum,jdbcType=INTEGER},
+      </if>
+      <if test="columnname != null">
+        #{columnname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.resultColumn">
+    update resultColumn
+    <set>
+      <if test="columnnum != null">
+        columnNum = #{columnnum,jdbcType=INTEGER},
+      </if>
+      <if test="columnname != null">
+        columnName = #{columnname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where result_id = #{resultId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.resultColumn">
+    update resultColumn
+    set columnNum = #{columnnum,jdbcType=INTEGER},
+      columnName = #{columnname,jdbcType=VARCHAR}
+    where result_id = #{resultId,jdbcType=BIGINT}
+  </update>
+
+</mapper>
