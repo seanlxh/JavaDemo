@@ -8,3 +8,5 @@ spring:
     password: lxh960119
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+  thymeleaf:
+    cache: false

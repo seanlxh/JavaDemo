@@ -35,6 +35,18 @@ public class dataSourceImpl implements BaseService<dataSource> {
         return dataSourceDao.selectByPrimaryKey(id);
     }
 
+    public int deleteById(Long id) {
+        return dataSourceDao.deleteByPrimaryKey(id);
+    }
+
+    public int startDS(Long id) {
+        return dataSourceDao.startDS(id);
+    }
+
+    public int stopDS(Long id) {
+        return dataSourceDao.stopDS(id);
+    }
+
     @Override
     public List<dataSource> getAll() {
         return dataSourceDao.getAll();

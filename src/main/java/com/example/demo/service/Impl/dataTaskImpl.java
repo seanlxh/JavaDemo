@@ -2,8 +2,10 @@ package com.example.demo.service.Impl;
 
 import com.example.demo.IDao.dataSourceMapper;
 import com.example.demo.IDao.dataTaskMapper;
+import com.example.demo.IDao.dataTaskOverTimeMapper;
 import com.example.demo.entity.dataSource;
 import com.example.demo.entity.dataTask;
+import com.example.demo.entity.dataTaskOverTime;
 import com.example.demo.service.BaseService;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,9 @@ public class dataTaskImpl implements BaseService<dataTask> {
 
     @Resource
     private dataTaskMapper dataTaskDao;
+
+    @Resource
+    private dataTaskOverTimeMapper dataTaskOverTimeDao;
 
     @Override
     public void save(dataTask entity) {
@@ -41,4 +46,13 @@ public class dataTaskImpl implements BaseService<dataTask> {
     public List<dataTask> getAll() {
         return dataTaskDao.getAll();
     }
+
+    public int updateFinishStateByPrimaryKey(long taskId){
+        Long timeMillis = System.currentTimeMillis();
+        dataTaskOverTimeDao.insert(new dataTaskOverTime(taskId,timeMillis));
+        return dataTaskDao.updateFinishStateByPrimaryKey(taskId);}
+    public int updateSuspendStateByPrimaryKey(long taskId){return dataTaskDao.updateSuspendStateByPrimaryKey(taskId);}
+    public int updateStartStateByPrimaryKey(long taskId){return dataTaskDao.updateStartStateByPrimaryKey(taskId);}
+    public int updateAllStateByPrimaryKey(long threadId){return dataTaskDao.updateAllStateByPrimaryKey(threadId);}
+
 }

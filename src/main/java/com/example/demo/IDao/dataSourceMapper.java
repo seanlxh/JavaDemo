@@ -18,4 +18,8 @@ public interface dataSourceMapper {
     int updateByPrimaryKey(dataSource record);
 
     List<dataSource> getAll();
+
+    int startDS(Long dsId);
+
+    int stopDS(Long dsId);
 }

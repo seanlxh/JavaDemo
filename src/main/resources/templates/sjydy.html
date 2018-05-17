@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>API平台</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/datepicker3.css" rel="stylesheet"/>
+    <link href="/css/styles.css" rel="stylesheet"/>
+
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/chart.min.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/ltpt.js"></script>
+    <script src="/js/info.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><span>API</span>平台</a>
+            <ul class="user-menu">
+                <li class="dropdown pull-right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{username}} <span class="caret"></span></a>
+                </li>
+            </ul>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+
+<link href="/css/font-awesome.min.css" rel="stylesheet"/>
+<script src="/js/jquery.json.js"></script>
+<script src="/js/json2.js"></script>
+<script src="/js/jsonlint.js"></script>
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+    <form role="search">
+        <div class="form-group">
+            <img alt="100x100" src="/images/pc_10360.jpg" />
+        </div>
+    </form>
+    <ul class="nav menu">
+        <li class="active"><a href="add"><span class="glyphicon glyphicon-dashboard"></span>数据源定义</a></li>
+        <li><a href="index"><span class="glyphicon glyphicon-pencil"></span>联调平台</a></li>
+        <li><a href="sssh.html"><span class="glyphicon glyphicon-stats"></span>调用统计</a></li>
+        <li><a href="dzpt.html"><span class="glyphicon glyphicon-list-alt"></span>用户管理</a></li>
+        <li><a href="sszb.html"><span class="glyphicon glyphicon-th"></span>参数配置</a></li>
+        <li><a href="bigpipe.html"><span class="glyphicon glyphicon-cloud"></span> </a></li>
+    </ul>
+    <div style="margin-left: 25px">
+        <div style="margin-top: 100px">
+            <strong>联系我们</strong>
+        </div>
+        <div style="margin-top: 15px">
+            <p>电话：17862702798</p>
+        </div>
+    </div>
+</div><!--/.sidebar-->
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#home" data-toggle="tab">
+                数据源增加
+            </a>
+        </li>
+        <div class="col-md-offset-4">
+            <li><a href="http://wiki.baidu.com/pages/viewpage.action?pageId=210687467" target="_blank" class="dropdown pull-right">使用帮助</a></li>
+        </div>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+
+        <div class="tab-pane fade in active" id="home">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form action="../csvjarfileUpload" method="post" enctype="multipart/form-data">
+                    数据源名称:
+                    <div>
+                        <div class="input-group col-xs-12">
+                            <input type="text" name="name" id="name" class="form-control"
+                                   style="width: 400px;" placeholder=""/>
+                        </div>
+                        数据源描述:
+                        <div class="input-group col-xs-12">
+                            <textarea type="text" name="desc" id="desc" class="form-control"
+                                   style="width: 400px;" placeholder="" rows="8" cols="20"/>
+                        </div>
+                        数据源类型:
+                        <div class="input-group col-xs-12">
+                            <div class="input-group-btn">
+                                <select name="type" class="form-control" style="width: 220px;" id="type">
+                                    <option value="1">获取数据量</option>
+                                    <option value="2">获取无分页数据</option>
+                                    <option value="3">获取分页数据</option>
+                                </select>
+                            </div>
+                        </div>
+                        列名：
+                        <div class="input-group col-xs-12">
+                            <input type="text" name="columnName" id="columnName" class="form-control"
+                                      style="width: 300px;" value="[]"/>
+                        </div>
+                        <p>上传csv: <input type="file" name="fileName"/></p>
+                        <p>上传jar包: <input type="file" name="fileName"/></p>
+                    </div>
+                        <input class="btn btn-primary" type="submit" value="提交"/>
+                    <!--<div id="resulttest"></div>-->
+                    <!--<div class="form-group"></div>-->
+                    </form>
+                </div>
+
+
+            </div><!--/.row-->
+
+
+        </div><!--/.home-->
+
+        <div class="tab-pane fade" id="realtime">
+            <div class="row"> </div>
+            <div id="tabtest"></div>
+
+        </div><!--/.realtime-->
+
+        <div class="tab-pane fade" id="shuju">
+            <div class="row"> </div>
+            <div id="peizhi"></div>
+
+        </div><!--/.shuju-->
+
+    </div>
+
+
+    <div class="modal fade" id="jsonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">json数据</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="json-result">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

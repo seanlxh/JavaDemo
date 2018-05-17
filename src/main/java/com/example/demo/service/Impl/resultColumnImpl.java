@@ -9,33 +9,33 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 @Service("resultColumnservice")
-public class resultColumnImpl implements BaseService<paraInfo>{
+public class resultColumnImpl implements BaseService<resultColumn>{
 
     @Resource
     private resultColumnMapper resultColumnDao;
 
     @Override
-    public void save(paraInfo entity) {
+    public void save(resultColumn entity) {
+        resultColumnDao.insert(entity);
+    }
+
+    @Override
+    public void delete(resultColumn entity) {
 
     }
 
     @Override
-    public void delete(paraInfo entity) {
+    public void update(resultColumn entity) {
 
     }
 
     @Override
-    public void update(paraInfo entity) {
-
-    }
-
-    @Override
-    public paraInfo findById(Long id) {
+    public resultColumn findById(Long id) {
         return null;
     }
 
     @Override
-    public List<paraInfo> getAll() {
+    public List<resultColumn> getAll() {
         return null;
     }
 

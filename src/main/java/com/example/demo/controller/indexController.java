@@ -20,5 +20,8 @@ public class indexController {
     public String toIndex(HttpServletRequest request, Model model){
         return "ltpt";
     }
-
+    @RequestMapping("/add")
+    public String toAdd(HttpServletRequest request, Model model){
+        return "sjydy";
+    }
 }

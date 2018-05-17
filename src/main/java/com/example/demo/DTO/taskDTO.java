@@ -5,18 +5,21 @@ public class taskDTO {
 
     private Long dsID;
 
-    private int state;
+    private int stateTmp;
 
     private String userName;
 
     private String timestamp;
 
-    public taskDTO(Long taskID, Long dsID, int state, String userName, String timestamp) {
+    private Long threadId;
+
+    public taskDTO(Long taskID, Long dsID, int stateTmp, String userName, String timestamp,Long threadId) {
         this.taskID = taskID;
         this.dsID = dsID;
-        this.state = state;
+        this.stateTmp = stateTmp;
         this.userName = userName;
         this.timestamp = timestamp;
+        this.threadId = threadId;
     }
 
     public Long getTaskID() {
@@ -36,11 +39,11 @@ public class taskDTO {
     }
 
     public int getState() {
-        return state;
+        return stateTmp;
     }
 
     public void setState(int state) {
-        this.state = state;
+        this.stateTmp = state;
     }
 
     public String getUserName() {
@@ -57,5 +60,13 @@ public class taskDTO {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Long getThreadId() {
+        return threadId;
+    }
+
+    public void setThreadId(Long threadId) {
+        this.threadId = threadId;
     }
 }

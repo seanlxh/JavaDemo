@@ -9,6 +9,8 @@ public class inputPara {
 
     private Integer sequence;
 
+    private String des;
+
     public Integer getTypeId() {
         return typeId;
     }
@@ -39,5 +41,13 @@ public class inputPara {
 
     public void setSequence(Integer sequence) {
         this.sequence = sequence;
+    }
+
+    public String getDes() {
+        return des;
+    }
+
+    public void setDes(String des) {
+        this.des = des == null ? null : des.trim();
     }
 }

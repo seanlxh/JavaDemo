@@ -15,6 +15,16 @@ public class functionLogic {
 
     private String resulttype;
 
+    public functionLogic(Long functionId, Long dsId, String classname, String methodname, Integer paranum, Integer executesequence, String resulttype) {
+        this.functionId = functionId;
+        this.dsId = dsId;
+        this.classname = classname;
+        this.methodname = methodname;
+        this.paranum = paranum;
+        this.executesequence = executesequence;
+        this.resulttype = resulttype;
+    }
+
     public Long getFunctionId() {
         return functionId;
     }

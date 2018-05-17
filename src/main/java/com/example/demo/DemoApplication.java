@@ -11,12 +11,24 @@ import org.springframework.web.WebApplicationInitializer;
 
 @SpringBootApplication
 @MapperScan("com.example.demo.IDao")
-public class DemoApplication{
+//public class DemoApplication{
+//
+//
+//	public static void main(String[] args) {
+//		SpringApplication.run(DemoApplication.class, args);
+//	}
+//
+//
+//}
+public class DemoApplication extends SpringBootServletInitializer {
+	public DemoApplication() {
+	}
 
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(new Class[]{DemoApplication.class});
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-
-
 }

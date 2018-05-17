@@ -9,7 +9,5 @@ public interface inputParaMapper {
 
     int insertSelective(inputPara record);
 
-    List<inputPara> selectByTypeId(int type_id);
-
-
+    List<inputPara> selectByTypeId(int id);
 }

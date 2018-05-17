@@ -5,19 +5,13 @@ public class dataTask {
 
     private Long dsId;
 
-    private Integer state;
+    private Integer stateTmp;
 
     private String username;
 
     private Long timestamp;
 
-    public dataTask(Long taskId, Long dsId, Integer state, String username, Long timestamp) {
-        this.taskId = taskId;
-        this.dsId = dsId;
-        this.state = state;
-        this.username = username;
-        this.timestamp = timestamp;
-    }
+    private Long threadId;
 
     public Long getTaskId() {
         return taskId;
@@ -36,11 +30,11 @@ public class dataTask {
     }
 
     public Integer getState() {
-        return state;
+        return stateTmp;
     }
 
     public void setState(Integer state) {
-        this.state = state;
+        this.stateTmp = state;
     }
 
     public String getUsername() {
@@ -57,5 +51,22 @@ public class dataTask {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Long getThreadId() {
+        return threadId;
+    }
+
+    public void setThreadId(Long threadId) {
+        this.threadId = threadId;
+    }
+
+    public dataTask(Long taskId, Long dsId, Integer state, String username, Long timestamp, Long threadId) {
+        this.taskId = taskId;
+        this.dsId = dsId;
+        this.stateTmp = state;
+        this.username = username;
+        this.timestamp = timestamp;
+        this.threadId = threadId;
     }
 }

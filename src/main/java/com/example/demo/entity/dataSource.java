@@ -11,6 +11,25 @@ public class dataSource {
 
     private Long timestamp;
 
+    private Integer state;
+    public dataSource(Long dsId, String dsName, String dsDesc, Integer type, Long timestamp) {
+        this.dsId = dsId;
+        this.dsName = dsName;
+        this.dsDesc = dsDesc;
+        this.type = type;
+        this.timestamp = timestamp;
+        this.state = 1;
+    }
+
+    public dataSource(Long dsId, String dsName, String dsDesc, Integer type, Long timestamp, Integer state) {
+        this.dsId = dsId;
+        this.dsName = dsName;
+        this.dsDesc = dsDesc;
+        this.type = type;
+        this.timestamp = timestamp;
+        this.state = state;
+    }
+
     public Long getDsId() {
         return dsId;
     }
@@ -49,5 +68,13 @@ public class dataSource {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

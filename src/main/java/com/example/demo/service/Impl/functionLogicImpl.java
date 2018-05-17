@@ -16,7 +16,7 @@ public class functionLogicImpl implements BaseService<functionLogic> {
 
     @Override
     public void save(functionLogic entity) {
-
+        functionLogicDao.insert(entity);
     }
 
     @Override

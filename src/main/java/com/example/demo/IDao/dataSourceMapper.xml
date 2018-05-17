@@ -1,93 +1,104 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.IDao.dataSourceMapper" >
-  <resultMap id="BaseResultMap" type="com.example.demo.entity.dataSource" >
-    <id column="DS_ID" property="dsId" jdbcType="BIGINT" />
-    <result column="DS_NAME" property="dsName" jdbcType="VARCHAR" />
-    <result column="DS_DESC" property="dsDesc" jdbcType="VARCHAR" />
-    <result column="Type" property="type" jdbcType="INTEGER" />
-    <result column="timestamp" property="timestamp" jdbcType="BIGINT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.IDao.dataSourceMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.dataSource">
+    <id column="DS_ID" jdbcType="BIGINT" property="dsId" />
+    <result column="DS_NAME" jdbcType="VARCHAR" property="dsName" />
+    <result column="DS_DESC" jdbcType="VARCHAR" property="dsDesc" />
+    <result column="Type" jdbcType="INTEGER" property="type" />
+    <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
+    <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     DS_ID, DS_NAME, DS_DESC, Type, timestamp
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from DataSource
     where DS_ID = #{dsId,jdbcType=BIGINT}
   </select>
-  <select id="getAll" resultMap="BaseResultMap" >
+  <select id="getAll" resultMap="BaseResultMap">
     select
     *
     from DataSource
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from DataSource
     where DS_ID = #{dsId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.example.demo.entity.dataSource" >
+  <update id="stopDS" parameterType="java.lang.Long">
+    update DataSource
+    set state = 2
+    where DS_ID = #{dsId,jdbcType=BIGINT}
+  </update>
+  <update id="startDS" parameterType="java.lang.Long">
+    update DataSource
+    set state = 1
+    where DS_ID = #{dsId,jdbcType=BIGINT}
+  </update>
+  <insert id="insert" parameterType="com.example.demo.entity.dataSource">
     insert into DataSource (DS_ID, DS_NAME, DS_DESC, 
-      Type, timestamp)
+      Type, timestamp,state)
     values (#{dsId,jdbcType=BIGINT}, #{dsName,jdbcType=VARCHAR}, #{dsDesc,jdbcType=VARCHAR}, 
-      #{type,jdbcType=INTEGER}, #{timestamp,jdbcType=BIGINT})
+      #{type,jdbcType=INTEGER}, #{timestamp,jdbcType=BIGINT},#{state,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.entity.dataSource" >
+  <insert id="insertSelective" parameterType="com.example.demo.entity.dataSource">
     insert into DataSource
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="dsId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dsId != null">
         DS_ID,
       </if>
-      <if test="dsName != null" >
+      <if test="dsName != null">
         DS_NAME,
       </if>
-      <if test="dsDesc != null" >
+      <if test="dsDesc != null">
         DS_DESC,
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         Type,
       </if>
-      <if test="timestamp != null" >
+      <if test="timestamp != null">
         timestamp,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="dsId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dsId != null">
         #{dsId,jdbcType=BIGINT},
       </if>
-      <if test="dsName != null" >
+      <if test="dsName != null">
         #{dsName,jdbcType=VARCHAR},
       </if>
-      <if test="dsDesc != null" >
+      <if test="dsDesc != null">
         #{dsDesc,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="timestamp != null" >
+      <if test="timestamp != null">
         #{timestamp,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.dataSource" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.dataSource">
     update DataSource
-    <set >
-      <if test="dsName != null" >
+    <set>
+      <if test="dsName != null">
         DS_NAME = #{dsName,jdbcType=VARCHAR},
       </if>
-      <if test="dsDesc != null" >
+      <if test="dsDesc != null">
         DS_DESC = #{dsDesc,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         Type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="timestamp != null" >
+      <if test="timestamp != null">
         timestamp = #{timestamp,jdbcType=BIGINT},
       </if>
     </set>
     where DS_ID = #{dsId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.dataSource" >
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.dataSource">
     update DataSource
     set DS_NAME = #{dsName,jdbcType=VARCHAR},
       DS_DESC = #{dsDesc,jdbcType=VARCHAR},

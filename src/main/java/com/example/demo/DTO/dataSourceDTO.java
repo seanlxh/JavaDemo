@@ -11,14 +11,25 @@ public class dataSourceDTO {
 
     private String timestamp;
 
-    public dataSourceDTO(Long dsId, String dsName, String dsDesc, Integer type, String timestamp) {
+    private int state;
+
+
+    public dataSourceDTO(Long dsId, String dsName, String dsDesc, Integer type, String timestamp,int state) {
         this.dsId = dsId;
         this.dsName = dsName;
         this.dsDesc = dsDesc;
         this.type = type;
         this.timestamp = timestamp;
+        this.state = state;
     }
 
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
 
     public Long getDsId() {
         return dsId;

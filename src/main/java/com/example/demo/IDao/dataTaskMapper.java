@@ -19,4 +19,13 @@ public interface dataTaskMapper {
     int updateByPrimaryKey(dataTask record);
 
     List<dataTask> getAll();
+
+    int updateFinishStateByPrimaryKey(Long taskId);
+
+    int updateSuspendStateByPrimaryKey(Long taskId);
+
+    int updateStartStateByPrimaryKey(Long taskId);
+
+    int updateAllStateByPrimaryKey(Long threadId);
+
 }

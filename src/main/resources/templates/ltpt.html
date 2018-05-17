@@ -54,11 +54,11 @@
             </div>
         </form>
         <ul class="nav menu">
-            <li><a href="dashbord.html"><span class="glyphicon glyphicon-dashboard"></span> Dashbord</a></li>
-            <li class="active"><a href="ltpt.html"><span class="glyphicon glyphicon-th"></span> 联调平台</a></li>
-            <li><a href="sssh.html"><span class="glyphicon glyphicon-stats"></span> </a></li>
-            <li><a href="dzpt.html"><span class="glyphicon glyphicon-list-alt"></span> </a></li>
-            <li><a href="sszb.html"><span class="glyphicon glyphicon-pencil"></span> </a></li>
+            <li><a href="add"><span class="glyphicon glyphicon-dashboard"></span> 数据源定义</a></li>
+            <li class="active"><a href="index"><span class="glyphicon glyphicon-pencil"></span> 联调平台</a></li>
+            <li><a href="sssh.html"><span class="glyphicon glyphicon-stats"></span> 调用统计</a></li>
+            <li><a href="dzpt.html"><span class="glyphicon glyphicon-list-alt"></span> 用户管理</a></li>
+            <li><a href="sszb.html"><span class="glyphicon glyphicon-th"></span> 参数配置</a></li>
             <li><a href="bigpipe.html"><span class="glyphicon glyphicon-cloud"></span> </a></li>
         </ul>
         <div style="margin-left: 25px">
@@ -89,7 +89,17 @@
                 <div class="row">
                 </div><!--/.row-->
 
-
+                <a id="btn0"></a>
+                <input id="pageSize" type="text" size="1" maxlength="2" value="getDefaultValue()"/><a> 条 </a> <a href="#" id="pageSizeSet">设置</a>&nbsp;
+                <a id="sjzl"></a>&nbsp;
+                <a  href="#" id="btn1">首页</a>
+                <a  href="#" id="btn2">上一页</a>
+                <a  href="#" id="btn3">下一页</a>
+                <a  href="#" id="btn4">尾页</a>&nbsp;
+                <a>转到&nbsp;</a>
+                <input id="changePage" type="text" size="1" maxlength="4"/>
+                <a>页&nbsp;</a>
+                <a  href="#" id="btn5">跳转</a>
      <div id="envtest"></div>
 
 
@@ -97,9 +107,38 @@
 
             <div class="tab-pane fade" id="realtime">
                 <div class="row"> </div>
+                <a id="btn0rt"></a>
+                <input id="pageSizert" type="text" size="1" maxlength="2" value="getDefaultValue()"/><a> 条 </a> <a href="#" id="pageSizeSetrt">设置</a>&nbsp;
+                <a id="sjzlrt"></a>&nbsp;
+                <a  href="#" id="btn1rt">首页</a>
+                <a  href="#" id="btn2rt">上一页</a>
+                <a  href="#" id="btn3rt">下一页</a>
+                <a  href="#" id="btn4rt">尾页</a>&nbsp;
+                <a>转到&nbsp;</a>
+                <input id="changePagert" type="text" size="1" maxlength="4"/>
+                <a>页&nbsp;</a>
+                <a  href="#" id="btn5rt">跳转</a>
                 <div id="tabtest"></div>
 
             </div><!--/.realtime-->
+
+            <div class="tab-pane fade" id="shuju">
+                <div class="row"> </div>
+                <a id="btn0pz"></a>
+                <input id="pageSizepz" type="text" size="1" maxlength="2" value="getDefaultValue()"/><a> 条 </a> <a href="#" id="pageSizeSetpz">设置</a>&nbsp;
+                <a id="sjzlpz"></a>&nbsp;
+                <a  href="#" id="btn1pz">首页</a>
+                <a  href="#" id="btn2pz">上一页</a>
+                <a  href="#" id="btn3pz">下一页</a>
+                <a  href="#" id="btn4pz">尾页</a>&nbsp;
+                <a>转到&nbsp;</a>
+                <input id="changePagepz" type="text" size="1" maxlength="4"/>
+                <a>页&nbsp;</a>
+                <a  href="#" id="btn5pz">跳转</a>
+
+                <div id="peizhi"></div>
+
+            </div><!--/.shuju-->
 
         </div>
 

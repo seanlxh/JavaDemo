@@ -7,6 +7,12 @@ public class resultColumn {
 
     private String columnname;
 
+    public resultColumn(Long resultId, Integer columnnum, String columnname) {
+        this.resultId = resultId;
+        this.columnnum = columnnum;
+        this.columnname = columnname;
+    }
+
     public Long getResultId() {
         return resultId;
     }

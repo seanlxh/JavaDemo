@@ -36,7 +36,7 @@ public class taskController {
             long lt = new Long(tasks.get(i).getTimestamp());
             Date date = new Date(lt);
             result = simpleDateFormat.format(date);
-            taskDTO tmp = new taskDTO(tasks.get(i).getTaskId(),tasks.get(i).getDsId(),tasks.get(i).getState(),tasks.get(i).getUsername(),result);
+            taskDTO tmp = new taskDTO(tasks.get(i).getTaskId(),tasks.get(i).getDsId(),tasks.get(i).getState(),tasks.get(i).getUsername(),result,tasks.get(i).getThreadId());
             res.add(tmp);
         }
         return res;

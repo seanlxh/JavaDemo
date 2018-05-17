@@ -15,7 +15,7 @@ public class paraInfoImpl implements BaseService<paraInfo>{
 
     @Override
     public void save(paraInfo entity) {
-
+        paraInfoDao.insert(entity);
     }
 
     @Override
