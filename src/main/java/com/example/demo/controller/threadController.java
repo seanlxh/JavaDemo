@@ -4,6 +4,7 @@ import com.example.demo.entity.*;
 import com.example.demo.service.Impl.*;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -58,7 +59,8 @@ public class threadController {
             HashMap<Integer,Object> integerObjectHashMap = new HashMap<Integer,Object>();
             dataSource ds = dataSourceService.findById(id);
             Long taskId = System.currentTimeMillis();
-            dataTask tmp1 = new dataTask(taskId,ds.getDsId(),1,"userName",System.currentTimeMillis(), Thread.currentThread().getId());
+            u_user user = (u_user) SecurityUtils.getSubject().getPrincipal();
+            dataTask tmp1 = new dataTask(taskId,ds.getDsId(),1,user.getNickname(),System.currentTimeMillis(), Thread.currentThread().getId());
             dataTaskService.updateAllStateByPrimaryKey(Thread.currentThread().getId());
             dataTaskService.save(tmp1);
             List<functionLogic> functionLogics = functionLogicService.selectByDSIDWithLogic(ds.getDsId());

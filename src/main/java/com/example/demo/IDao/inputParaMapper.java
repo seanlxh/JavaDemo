@@ -10,4 +10,6 @@ public interface inputParaMapper {
     int insertSelective(inputPara record);
 
     List<inputPara> selectByTypeId(int id);
+
+    int deleteByPrimaryKey(int id);
 }

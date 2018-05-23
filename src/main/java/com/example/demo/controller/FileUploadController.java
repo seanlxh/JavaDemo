@@ -147,27 +147,43 @@ public class FileUploadController {
         }
 
         String path1 = "/Users/seanlxh/Library/ApacheTomcat/webapps/demo-0.0.1-SNAPSHOT/WEB-INF/lib" ;
-        String path2 = "/Users/seanlxh/Library/ApacheTomcat/webapps/demo-0.0.1-SNAPSHOT/WEB-INF/csv" ;
+        String path2 = "/Users/seanlxh/Library/ApacheTomcat/webapps/demo-0.0.1-SNAPSHOT/WEB-INF/lib" ;
+
         MultipartFile file1 = files.get(0);
-        MultipartFile file2 = files.get(1);
-            String fileName = file1.getOriginalFilename();
-            int size = (int) file1.getSize();
-            System.out.println(fileName + "-->" + size);
+
+        String fileName = file1.getOriginalFilename();
+        int size = (int) file1.getSize();
+        System.out.println(fileName + "-->" + size);
         File dest1;
-        File dest2;
-            if(file2.isEmpty()||file1.isEmpty()){
+        if(file1.isEmpty()){
+            return "false";
+        }else{
+            dest1 = new File(path1 + "/" + fileName);
+
+            if(!dest1.getParentFile().exists()){ //判断文件父目录是否存在
+                dest1.getParentFile().mkdir();
+            }
+            try {
+                file1.transferTo(dest1);
+            }catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
                 return "false";
-            }else{
-                dest1 = new File(path1 + "/" + fileName);
-                dest2 = new File(path2 + "/" + fileName);
-                if(!dest1.getParentFile().exists()){ //判断文件父目录是否存在
-                    dest1.getParentFile().mkdir();
-                }
+            }
+        }
+        for(int i = 1 ; i < files.size(); i ++){
+            MultipartFile file2 = files.get(i);
+            File dest2;
+            String fileName2 = file2.getOriginalFilename();
+            if(file2.isEmpty()){
+                return "false";
+            }
+            else{
+                dest2 = new File(path2 + "/" + fileName2);
                 if(!dest2.getParentFile().exists()){ //判断文件父目录是否存在
                     dest2.getParentFile().mkdir();
                 }
                 try {
-                    file1.transferTo(dest1);
                     file2.transferTo(dest2);
                 }catch (Exception e) {
                     // TODO Auto-generated catch block
@@ -175,6 +191,8 @@ public class FileUploadController {
                     return "false";
                 }
             }
+
+        }
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(dest1));

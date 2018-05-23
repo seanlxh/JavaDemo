@@ -56,5 +56,10 @@
     *
     from inputPara
     where type_id = #{type_id,jdbcType=INTEGER}
+    ORDER BY sequence
   </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from inputPara
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </delete>
 </mapper>

@@ -21,7 +21,12 @@ public class inputParaImpl implements BaseService<inputPara>{
 
     @Override
     public void delete(inputPara entity) {
+        inputParaDao.deleteByPrimaryKey(entity.getTypeId());
+    }
 
+
+    public void delete(int id) {
+        inputParaDao.deleteByPrimaryKey(id);
     }
 
     @Override

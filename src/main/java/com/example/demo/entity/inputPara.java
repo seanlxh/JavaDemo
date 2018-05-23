@@ -11,6 +11,14 @@ public class inputPara {
 
     private String des;
 
+    public inputPara(Integer typeId, String name, String type, Integer sequence, String des) {
+        this.typeId = typeId;
+        this.name = name;
+        this.type = type;
+        this.sequence = sequence;
+        this.des = des;
+    }
+
     public Integer getTypeId() {
         return typeId;
     }

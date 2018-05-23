@@ -2,6 +2,9 @@ package com.example.demo.IDao;
 
 import com.example.demo.entity.u_user;
 
+import java.util.List;
+import java.util.Map;
+
 public interface u_userMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +17,6 @@ public interface u_userMapper {
     int updateByPrimaryKeySelective(u_user record);
 
     int updateByPrimaryKey(u_user record);
+
+    List<u_user> selectByMap(Map<String, Object> map);
 }

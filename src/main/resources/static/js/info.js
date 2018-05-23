@@ -410,6 +410,9 @@ $.getJSON('/DataSource/showDataSource',function(ret){
     display();
 })
 
+$.getJSON('/getUser',function(ret){
+    document.getElementById("curUser").innerHTML=ret.user ;
+})
 
 $.getJSON('/DataSource/showDataSource',function(ret){
     var template = "<table id=\"dsTablepz\" class=\"table table-striped table-bordered\" border=1>";
@@ -744,3 +747,4 @@ function displayPagepz(){
     });
 
 }
+

@@ -24,4 +24,20 @@ public class indexController {
     public String toAdd(HttpServletRequest request, Model model){
         return "sjydy";
     }
+    @RequestMapping("/charts")
+    public String charts(HttpServletRequest request, Model model){
+        return "charts";
+    }
+    @RequestMapping("/dashbord")
+    public String dashbord(HttpServletRequest request, Model model){
+        return "dashbord";
+    }
+    @RequestMapping("/table")
+    public String table(HttpServletRequest request, Model model){
+        return "tables";
+    }
+    @RequestMapping("/form")
+    public String form(HttpServletRequest request, Model model){
+        return "forms";
+    }
 }
