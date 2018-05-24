@@ -165,7 +165,7 @@ function addNewPara() {
         var type = document.getElementById("type"+addNum[i].toString()).value;
         var name = document.getElementById("name"+addNum[i].toString()).value;
         var desc = document.getElementById("desc"+addNum[i].toString()).value;
-        if(type.equals("")||name.equals("")||desc.equals("")){
+        if(type==""||name==""||desc==""){
             alert("不能为空");
             return;
         }

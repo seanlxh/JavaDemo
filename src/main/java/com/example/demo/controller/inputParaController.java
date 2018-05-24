@@ -41,6 +41,14 @@ public class inputParaController {
         return inputParas;
     }
 
+    @RequestMapping("/getpara_type")
+    @ResponseBody
+    public List<para_type> getpara_type(HttpServletRequest request, Model model){
+        List<para_type> para_types = this.para_typeService.getAll();
+        return para_types;
+    }
+
+
     @RequestMapping("/tableData")
     @ResponseBody
     public List<Map<String,String>> tableData(HttpServletRequest request, Model model){

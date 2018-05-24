@@ -19,6 +19,27 @@ public class UseRecordController {
     @Resource
     private useRecordImpl useRecordService;
 
+    @Resource
+    private dataSourceImpl dataSourceService;
+
+    @RequestMapping("/getMonth")
+    @ResponseBody
+    public List<Integer> getMonth(HttpServletRequest request, Model model){
+        Date date = dateUtil.getStartTimeofDay(new Date());
+        List<Integer> result = new ArrayList<>();
+        for(int i = 6 ; i >=0 ; i --){
+            Date startDate = dateUtil.subDay(date,i);
+            Date endDate = dateUtil.subDay(date,i-1);
+            Map<String, Timestamp> map = new HashMap<>();
+            map.put("startTime",new Timestamp(startDate.getTime()));
+            map.put("endTime",new Timestamp(endDate.getTime()));
+            List<useRecord> res = useRecordService.selectByTime(map);
+            int size = res.size();
+            result.add(size);
+        }
+        return result;
+    }
+
     @RequestMapping("/getUseRecord")
     @ResponseBody
     public List<Integer> getUseRecord(HttpServletRequest request, Model model){
@@ -54,4 +75,6 @@ public class UseRecordController {
         }
         return result;
     }
+
+
 }
