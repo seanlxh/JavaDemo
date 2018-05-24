@@ -17,6 +17,8 @@ public class u_user {
 
     private Long status;
 
+    private Integer roleId;
+
     public Long getId() {
         return id;
     }
@@ -71,5 +73,13 @@ public class u_user {
 
     public void setStatus(Long status) {
         this.status = status;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }

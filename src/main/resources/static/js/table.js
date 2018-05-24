@@ -223,7 +223,7 @@ function addPara() {
     var content =  '';
     content += ("<br>数据源类型名称："+"</br>");
     content += ('<input type="text" name="name" id="name" class="form-control" value="" style="width: 280px;" placeholder=""/>');
-    content += ("<br>参数列表："+"</br>");
+    content += ("<br>参数列表：(int Num 是标准数据量参数)"+"</br>");
     content += ('<div id="para">')
     content += ('<div id="line'+list+'" class="row">');
     // content += ('<div class="col-lg-2"><label>类型</label><input type="text" name="type" id="type'+list+'" class="form-control" value="" style="width: 100px;" placeholder="输入参数类型"/></div>');
@@ -257,7 +257,7 @@ function edit(id){
         content += ('<input type="text" name="name" id="name" class="form-control" value="'+ret.typeName+'" style="width: 280px;" placeholder=""/>');
         content += ("<br>参数个数："+"</br>");
         content += ('<input type="text" name="desc" id="desc" class="form-control" value="'+ret.num+'" style="width: 280px;" disabled="disabled" placeholder=""/>');
-        content += ("<br>参数列表："+"</br>");
+        content += ("<br>参数列表：(int Num 是标准数据量参数)"+"</br>");
         content += ('<div id="para">')
         for(var j = 0; j < ret.num ; j ++ ){
             var paraName = ret.paraName[j];

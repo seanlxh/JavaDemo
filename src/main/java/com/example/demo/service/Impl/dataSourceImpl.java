@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 @Service("dataSourceService")
 public class dataSourceImpl implements BaseService<dataSource> {
@@ -51,4 +52,6 @@ public class dataSourceImpl implements BaseService<dataSource> {
     public List<dataSource> getAll() {
         return dataSourceDao.getAll();
     }
+
+    public List<dataSource> getTime(Map<String,Long> map){return dataSourceDao.getTime(map);}
 }

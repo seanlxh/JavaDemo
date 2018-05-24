@@ -36,10 +36,16 @@ public class LoginController {
         try {
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
             SecurityUtils.getSubject().login(token);
-            resultMap.put("status", 200);
-            resultMap.put("message", "登录成功");
-
-        } catch (Exception e) {
+            u_user u_user = (u_user)SecurityUtils.getSubject().getPrincipal();
+            if(u_user.getRoleId()==1){
+                resultMap.put("status", 200);
+                resultMap.put("message", "登录成功");
+            }else if(u_user.getRoleId()==2){
+                resultMap.put("status", 201);
+                resultMap.put("message", "登录成功");
+            }
+        }
+         catch (Exception e) {
             resultMap.put("status", 500);
             resultMap.put("message", e.getMessage());
         }

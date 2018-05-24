@@ -79,12 +79,16 @@ public class dataSourceController {
                                 if(judgeBasicTypeByName(tmpClass)){
                                     tmpObj = getObjectFromStringAndClass(tmpClass, para.getInputContent().substring(1,para.getInputContent().length()-1));
                                 }
+                                //TODO
 //                                else{
 //                                    JSONObject tmpStr = (JSONObject)jsonArray.get(0);
 //                                    tmptmpObj = (Object)JSONObject.toBean(tmpStr, tmpClass);
 //                                }
                             } else if(para.getOriType() == 1){
                                 tmpObj = integerObjectHashMap.get(para.getFuncResult());
+                            }
+                            else if(para.getOriType() == 3){
+                                tmpObj = getObjectFromStringAndClass(tmpClass, request.getParameter(para.getInputPara()));
                             }
                             objectArray.add(tmpObj);
                         }
@@ -155,6 +159,9 @@ public class dataSourceController {
 //                                }
                         } else if(para.getOriType() == 1){
                             tmpObj = integerObjectHashMap.get(para.getFuncResult());
+                        }
+                        else if(para.getOriType() == 3){
+                            tmpObj = getObjectFromStringAndClass(tmpClass, request.getParameter(para.getInputPara()));
                         }
                         objectArray.add(tmpObj);
                     }
@@ -276,8 +283,11 @@ public class dataSourceController {
                             tmpObj = integerObjectHashMap.get(para.getFuncResult());
                         }
                         else if(para.getOriType() == 3){
-                            tmpObj = Integer.parseInt(request.getParameter("PageNum"));
+                            tmpObj = getObjectFromStringAndClass(tmpClass, request.getParameter(para.getInputPara()));
                         }
+//                        else if(para.getOriType() == 3){
+//                            tmpObj = Integer.parseInt(request.getParameter("PageNum"));
+//                        }
                         objectArray.add(tmpObj);
                     }
                 }

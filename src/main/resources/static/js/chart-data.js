@@ -33,27 +33,35 @@ $(document).ready(function() {
 })
 
 
-		
-	var barChartData = {
-			labels : ["January","February","March","April","May","June","July"],
-			datasets : [
-				{
-					fillColor : "rgba(220,220,220,0.5)",
-					strokeColor : "rgba(220,220,220,0.8)",
-					highlightFill: "rgba(220,220,220,0.75)",
-					highlightStroke: "rgba(220,220,220,1)",
-					data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-				},
-				{
-					fillColor : "rgba(48, 164, 255, 0.2)",
-					strokeColor : "rgba(48, 164, 255, 0.8)",
-					highlightFill : "rgba(48, 164, 255, 0.75)",
-					highlightStroke : "rgba(48, 164, 255, 1)",
-					data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-				}
-			]
-	
-		}
+
+
+$(document).ready(function() {
+    $.getJSON('/getMonthData', function (ret1) {
+        $.getJSON('/getMonth', function (ret2) {
+            var barChartData;
+            barChartData = {
+                labels: [ret2[0], ret2[1], ret2[2], ret2[3], ret2[4], ret2[5], ret2[6]],
+                datasets: [
+                    {
+                        label: "My First dataset",
+                        fillColor: "rgba(220,220,220,0.2)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: [ret1[0], ret1[1], ret1[2], ret1[3], ret1[4], ret1[5], ret1[6]]
+                    },
+                ]
+
+            }
+            var chart2 = document.getElementById("bar-chart").getContext("2d");
+            window.myBar = new Chart(chart2).Bar(barChartData, {
+                responsive : true
+            });
+        })
+    })
+})
 
 	var pieData = [
 				{
@@ -113,10 +121,6 @@ $(document).ready(function() {
 
 window.onload = function(){
 
-	var chart2 = document.getElementById("bar-chart").getContext("2d");
-	window.myBar = new Chart(chart2).Bar(barChartData, {
-		responsive : true
-	});
 	var chart3 = document.getElementById("doughnut-chart").getContext("2d");
 	window.myDoughnut = new Chart(chart3).Doughnut(doughnutData, {responsive : true
 	});

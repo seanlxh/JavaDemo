@@ -3,6 +3,7 @@ package com.example.demo.IDao;
 import com.example.demo.entity.dataSource;
 
 import java.util.List;
+import java.util.Map;
 
 public interface dataSourceMapper {
     int deleteByPrimaryKey(Long dsId);
@@ -22,4 +23,6 @@ public interface dataSourceMapper {
     int startDS(Long dsId);
 
     int stopDS(Long dsId);
+
+    List<dataSource> getTime(Map<String,Long> map);
 }

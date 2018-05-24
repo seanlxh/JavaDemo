@@ -13,7 +13,7 @@ public class paraInfo {
 
     private Integer funcResult;
 
-    private Integer inputPara;
+    private String inputPara;
 
     public Long getParaId() {
         return paraId;
@@ -63,11 +63,11 @@ public class paraInfo {
         this.funcResult = funcResult;
     }
 
-    public Integer getInputPara() {
+    public String getInputPara() {
         return inputPara;
     }
 
-    public void setInputPara(Integer inputPara) {
-        this.inputPara = inputPara;
+    public void setInputPara(String inputPara) {
+        this.inputPara = inputPara == null ? null : inputPara.trim();
     }
 }

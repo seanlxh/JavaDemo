@@ -240,7 +240,7 @@ public class FileUploadController {
                         paraInfo.setFuncId(functime);
                         paraInfo.setParaType(paraType);
                         paraInfo.setOriType(3);
-                        paraInfo.setInputContent(content);
+                        paraInfo.setInputPara(content);
                         paraInfoService.save(paraInfo);
                     }
                 }

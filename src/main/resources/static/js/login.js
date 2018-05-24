@@ -8,7 +8,11 @@ $("#ajaxLogin").click(function abc() {
     }, function(result) {
         if (result.status == 200) {
             location.href = "/index/index";
-        } else {
+        }
+        else if (result.status == 201){
+            location.href = "/index/userIndex";
+        }
+        else {
             $("#erro").html(result.message);
         }
     });

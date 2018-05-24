@@ -23,6 +23,13 @@
     *
     from DataSource
   </select>
+  <select id="getTime" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    *
+    from DataSource
+    where timestamp &gt;= #{startTime,jdbcType=BIGINT}
+    AND timestamp &lt; #{endTime,jdbcType=BIGINT}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from DataSource
     where DS_ID = #{dsId,jdbcType=BIGINT}

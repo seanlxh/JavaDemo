@@ -103,6 +103,10 @@ public class threadController {
                             } else if(para.getOriType() == 1){
                                 tmpObj = integerObjectHashMap.get(para.getFuncResult());
                             }
+                            else if(para.getOriType() == 3){
+                                tmpObj = Integer.parseInt(request1.get(para.getInputPara())[0]);
+                            }
+
                             objectArray.add(tmpObj);
                         }
                     }
@@ -297,7 +301,7 @@ public class threadController {
                                 tmpObj = integerObjectHashMap.get(para.getFuncResult());
                             }
                             else if(para.getOriType() == 3){
-                                tmpObj = Integer.parseInt(request1.get("PageNum")[0]);
+                                tmpObj = Integer.parseInt(request1.get(para.getInputPara())[0]);
                             }
                             objectArray.add(tmpObj);
                         }

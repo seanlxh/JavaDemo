@@ -1,36 +1,37 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.IDao.u_userMapper" >
-  <resultMap id="BaseResultMap" type="com.example.demo.entity.u_user" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="pswd" property="pswd" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="BIGINT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.IDao.u_userMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.u_user">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="pswd" jdbcType="VARCHAR" property="pswd" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="status" jdbcType="BIGINT" property="status" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, nickname, email, pswd, create_time, last_login_time, status
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from u_user
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectByMap" resultMap="BaseResultMap" parameterType="java.util.Map" >
+  <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    *
     from u_user
     where nickname = #{nickname,jdbcType=VARCHAR}
     AND pswd = #{pswd,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from u_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.example.demo.entity.u_user" >
+  <insert id="insert" parameterType="com.example.demo.entity.u_user">
     insert into u_user (id, nickname, email, 
       pswd, create_time, last_login_time, 
       status)
@@ -38,80 +39,80 @@
       #{pswd,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.entity.u_user" >
+  <insert id="insertSelective" parameterType="com.example.demo.entity.u_user">
     insert into u_user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="nickname != null" >
+      <if test="nickname != null">
         nickname,
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         email,
       </if>
-      <if test="pswd != null" >
+      <if test="pswd != null">
         pswd,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="lastLoginTime != null" >
+      <if test="lastLoginTime != null">
         last_login_time,
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="nickname != null" >
+      <if test="nickname != null">
         #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="pswd != null" >
+      <if test="pswd != null">
         #{pswd,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="lastLoginTime != null" >
+      <if test="lastLoginTime != null">
         #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         #{status,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.u_user" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.u_user">
     update u_user
-    <set >
-      <if test="nickname != null" >
+    <set>
+      <if test="nickname != null">
         nickname = #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="pswd != null" >
+      <if test="pswd != null">
         pswd = #{pswd,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="lastLoginTime != null" >
+      <if test="lastLoginTime != null">
         last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status = #{status,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.u_user" >
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.u_user">
     update u_user
     set nickname = #{nickname,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
